@@ -1,0 +1,44 @@
+resolve:
+  http:
+    headers:
+      - matches: https://api.profcomff.com/**
+        name: Authorization
+        envVariable: SECRET_KEY
+
+apis:
+  auth@latest:
+    root: https://api.profcomff.com/auth/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/auth.ts
+  marketing@latest:
+    root: https://api.profcomff.com/marketing/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/marketing.ts
+  timetable@latest:
+    root: https://api.profcomff.com/timetable/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/timetable.ts
+  services@latest:
+    root: https://api.profcomff.com/services/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/services.ts
+  print@latest:
+    root: https://api.profcomff.com/print/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/print.ts
+  social@latest:
+    root: https://api.profcomff.com/social/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/social.ts
+  userdata@latest:
+    root: https://api.profcomff.com/userdata/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/userdata.ts
+  achievement@latest:
+    root: https://api.profcomff.com/achievement/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/achievement.ts
+  pinger@latest:
+    root: https://pinger.profcomff.com/openapi.json
+    x-openapi-ts:
+      output: ./src/openapi/pinger.ts
