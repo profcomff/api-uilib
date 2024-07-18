@@ -23,6 +23,7 @@ export type paths = (
     userdataPaths
 );
 
+// TODO: Научить работать с различными средами
 export const client = createClient<paths>({ baseUrl: "https://api.profcomff.com/" });
 
 export default client;
