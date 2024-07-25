@@ -29,7 +29,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/category/${integer}/param`]: {
+    "/category/{category_id}/param": {
         parameters: {
             query?: never;
             header?: never;
@@ -53,7 +53,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/category/${integer}/param/${integer}`]: {
+    "/category/{category_id}/param/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -81,7 +81,7 @@ export interface paths {
         patch: operations["patch_param_category__category_id__param__id__patch"];
         trace?: never;
     };
-    [path: `/category/${integer}`]: {
+    "/category/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -133,7 +133,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/source/${integer}`]: {
+    "/source/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -161,7 +161,7 @@ export interface paths {
         patch: operations["patch_source_source__id__patch"];
         trace?: never;
     };
-    [path: `/user/${integer}`]: {
+    "/user/{id}": {
         parameters: {
             query?: never;
             header?: never;

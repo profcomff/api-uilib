@@ -44,7 +44,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/v1/user/${integer}`]: {
+    "/v1/user/{id}": {
         parameters: {
             query?: never;
             header?: never;

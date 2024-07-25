@@ -69,7 +69,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/group/${integer}`]: {
+    "/group/{group_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -148,7 +148,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/vk/${integer}`]: {
+    "/vk/{group_id}": {
         parameters: {
             query?: never;
             header?: never;

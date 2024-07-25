@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    [path: `/airflow/${integer}/link`]: {
+    "/airflow/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/coder/${integer}/link`]: {
+    "/coder/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -445,7 +445,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/group/${integer}`]: {
+    "/group/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -597,7 +597,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/mailu/${integer}/link`]: {
+    "/mailu/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -860,7 +860,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/postgres/${integer}/link`]: {
+    "/postgres/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -918,7 +918,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/scope/${integer}`]: {
+    "/scope/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -965,7 +965,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/session/${integer}`]: {
+    "/session/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -982,7 +982,7 @@ export interface paths {
         patch: operations["update_session_session__id__patch"];
         trace?: never;
     };
-    [path: `/session/${string}`]: {
+    "/session/{token}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1119,7 +1119,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/user/${integer}`]: {
+    "/user/{user_id}": {
         parameters: {
             query?: never;
             header?: never;

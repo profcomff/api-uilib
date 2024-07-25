@@ -28,7 +28,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/alert/${integer}`]: {
+    "/alert/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -80,7 +80,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/fetcher/${integer}`]: {
+    "/fetcher/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -132,7 +132,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/metric/${integer}`]: {
+    "/metric/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -176,7 +176,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/receiver/${integer}`]: {
+    "/receiver/{id}": {
         parameters: {
             query?: never;
             header?: never;

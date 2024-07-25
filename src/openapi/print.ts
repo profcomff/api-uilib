@@ -60,7 +60,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/file/${string}`]: {
+    "/file/{pin}": {
         parameters: {
             query?: never;
             header?: never;

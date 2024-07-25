@@ -25,7 +25,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/achievement/${integer}/reciever`]: {
+    "/achievement/{achievement_id}/reciever": {
         parameters: {
             query?: never;
             header?: never;
@@ -42,7 +42,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/achievement/${integer}/reciever/${integer}`]: {
+    "/achievement/{achievement_id}/reciever/{user_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -66,7 +66,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/achievement/${integer}`]: {
+    "/achievement/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -77,7 +77,11 @@ export interface paths {
         get: operations["get_achievement_achievement__id__get"];
         put?: never;
         post?: never;
-        delete?: never;
+        /**
+         * Delete Achievement
+         * @description Нужны права на: `achievements.achievement.delete`
+         */
+        delete: operations["delete_achievement_achievement__id__delete"];
         options?: never;
         head?: never;
         /**
@@ -87,7 +91,7 @@ export interface paths {
         patch: operations["edit_achievement_achievement__id__patch"];
         trace?: never;
     };
-    [path: `/achievement/${integer}/picture`]: {
+    "/achievement/{id}/picture": {
         parameters: {
             query?: never;
             header?: never;
@@ -104,7 +108,7 @@ export interface paths {
         patch: operations["upload_picture_achievement__id__picture_patch"];
         trace?: never;
     };
-    [path: `/user/${integer}`]: {
+    "/user/{user_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -197,6 +201,15 @@ export interface components {
         RecieverGet: {
             /** User Id */
             user_id: number;
+        };
+        /** StatusResponseModel */
+        StatusResponseModel: {
+            /** Message */
+            message: string;
+            /** Ru */
+            ru: string;
+            /** Status */
+            status: string;
         };
         /** UserGet */
         UserGet: {
@@ -389,6 +402,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["achievement_api__routes__achievement__AchievementGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_achievement_achievement__id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatusResponseModel"];
                 };
             };
             /** @description Validation Error */

@@ -22,7 +22,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/event/${integer}/comment/`]: {
+    "/event/{event_id}/comment/": {
         parameters: {
             query?: never;
             header?: never;
@@ -40,7 +40,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/event/${integer}/comment/${integer}`]: {
+    "/event/{event_id}/comment/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -59,7 +59,7 @@ export interface paths {
         patch: operations["update_comment_event__event_id__comment__id__patch"];
         trace?: never;
     };
-    [path: `/event/${integer}/comment/${integer}/review/`]: {
+    "/event/{event_id}/comment/{id}/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -76,7 +76,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/event/${integer}/comment/review/`]: {
+    "/event/{event_id}/comment/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -93,7 +93,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/event/${integer}`]: {
+    "/event/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -148,7 +148,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/group/${integer}`]: {
+    "/group/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -185,7 +185,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/${integer}`]: {
+    "/lecturer/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -204,7 +204,7 @@ export interface paths {
         patch: operations["patch_lecturer_lecturer__id__patch"];
         trace?: never;
     };
-    [path: `/lecturer/${integer}/comment/`]: {
+    "/lecturer/{lecturer_id}/comment/": {
         parameters: {
             query?: never;
             header?: never;
@@ -222,7 +222,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/${integer}/comment/${integer}`]: {
+    "/lecturer/{lecturer_id}/comment/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -241,7 +241,7 @@ export interface paths {
         patch: operations["update_comment_lecturer_lecturer__lecturer_id__comment__id__patch"];
         trace?: never;
     };
-    [path: `/lecturer/${integer}/comment/${integer}/review/`]: {
+    "/lecturer/{lecturer_id}/comment/{id}/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -258,7 +258,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/${integer}/comment/review/`]: {
+    "/lecturer/{lecturer_id}/comment/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -275,7 +275,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/${integer}/photo`]: {
+    "/lecturer/{lecturer_id}/photo": {
         parameters: {
             query?: never;
             header?: never;
@@ -306,7 +306,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/${integer}/photo/${integer}`]: {
+    "/lecturer/{lecturer_id}/photo/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -341,7 +341,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/lecturer/photo/review/${integer}`]: {
+    "/lecturer/photo/review/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -376,7 +376,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    [path: `/room/${integer}`]: {
+    "/room/{id}": {
         parameters: {
             query?: never;
             header?: never;
