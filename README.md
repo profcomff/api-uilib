@@ -8,11 +8,22 @@
 ## Использование
 
 ```ts
-import { client } from @profcomff/api-uilib;
+import { createClient } from '@profcomff/api-uilib';
 
-const me = await client.GET('/auth/me', {
-  params: {
-    info: ["groups", "indirect_groups", "session_scopes", "user_scopes", "auth_methods"],
-  },
+// Setup client with base API path
+// You can use environment `import.meta.env.VITE_API_URL` for example
+const apiClient = createClient("https://api.test.profcomff.com");
+
+// Setup token for requests to API
+// It is optional, only for routes with authention
+setupAuth("myApiTokenHere");
+
+// Make request
+const me_with_scopes = await apiClient.GET("/auth/me", {
+    params: {
+        query: {
+            info: ["session_scopes"]
+        }
+    }
 });
 ```
