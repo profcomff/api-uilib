@@ -3,5 +3,7 @@
         "module": "ESNext",
         "moduleResolution": "Bundler",
         "noUncheckedIndexedAccess": true,
+        "composite": true,
+        "declarationMap": true
     }
 }
