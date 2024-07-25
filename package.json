@@ -11,8 +11,8 @@
   "author": "Roman Dyakov <roman@dyakov.space>",
   "license": "BSD 3-Clause",
   "devDependencies": {
-    "openapi-typescript": "^7.0.4",
-    "typescript": "^5.5.3"
+    "openapi-typescript": "^7.1.0",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "openapi-fetch": "^0.10.2"
