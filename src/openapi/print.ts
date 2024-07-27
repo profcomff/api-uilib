@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/admin/reboot": {
+    "/print/admin/reboot": {
         parameters: {
             query?: never;
             header?: never;
@@ -21,7 +21,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/admin/update": {
+    "/print/admin/update": {
         parameters: {
             query?: never;
             header?: never;
@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/file": {
+    "/print/file": {
         parameters: {
             query?: never;
             header?: never;
@@ -60,7 +60,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/file/{pin}": {
+    "/print/file/{pin}": {
         parameters: {
             query?: never;
             header?: never;
@@ -99,7 +99,7 @@ export interface paths {
         patch: operations["update_file_options_file__pin__patch"];
         trace?: never;
     };
-    "/is_union_member": {
+    "/print/is_union_member": {
         parameters: {
             query?: never;
             header?: never;
@@ -123,7 +123,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/qr": {
+    "/print/qr": {
         parameters: {
             query?: never;
             header?: never;

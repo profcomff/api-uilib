@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/v1/action": {
+    "/marketing/v1/action": {
         parameters: {
             query?: never;
             header?: never;
@@ -24,7 +24,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/user": {
+    "/marketing/v1/user": {
         parameters: {
             query?: never;
             header?: never;
@@ -44,7 +44,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/user/{id}": {
+    "/marketing/v1/user/{id}": {
         parameters: {
             query?: never;
             header?: never;

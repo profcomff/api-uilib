@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/event/": {
+    "/timetable/event/": {
         parameters: {
             query?: never;
             header?: never;
@@ -22,7 +22,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/{event_id}/comment/": {
+    "/timetable/event/{event_id}/comment/": {
         parameters: {
             query?: never;
             header?: never;
@@ -40,7 +40,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/{event_id}/comment/{id}": {
+    "/timetable/event/{event_id}/comment/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -59,7 +59,7 @@ export interface paths {
         patch: operations["update_comment_event__event_id__comment__id__patch"];
         trace?: never;
     };
-    "/event/{event_id}/comment/{id}/review/": {
+    "/timetable/event/{event_id}/comment/{id}/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -76,7 +76,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/{event_id}/comment/review/": {
+    "/timetable/event/{event_id}/comment/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -93,7 +93,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/event/{id}": {
+    "/timetable/event/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -112,7 +112,7 @@ export interface paths {
         patch: operations["patch_event_event__id__patch"];
         trace?: never;
     };
-    "/event/bulk": {
+    "/timetable/event/bulk": {
         parameters: {
             query?: never;
             header?: never;
@@ -130,7 +130,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group/": {
+    "/timetable/group/": {
         parameters: {
             query?: never;
             header?: never;
@@ -148,7 +148,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group/{id}": {
+    "/timetable/group/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -167,7 +167,7 @@ export interface paths {
         patch: operations["patch_group_group__id__patch"];
         trace?: never;
     };
-    "/lecturer/": {
+    "/timetable/lecturer/": {
         parameters: {
             query?: never;
             header?: never;
@@ -185,7 +185,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/{id}": {
+    "/timetable/lecturer/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -204,7 +204,7 @@ export interface paths {
         patch: operations["patch_lecturer_lecturer__id__patch"];
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/comment/": {
+    "/timetable/lecturer/{lecturer_id}/comment/": {
         parameters: {
             query?: never;
             header?: never;
@@ -222,7 +222,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/comment/{id}": {
+    "/timetable/lecturer/{lecturer_id}/comment/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -241,7 +241,7 @@ export interface paths {
         patch: operations["update_comment_lecturer_lecturer__lecturer_id__comment__id__patch"];
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/comment/{id}/review/": {
+    "/timetable/lecturer/{lecturer_id}/comment/{id}/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -258,7 +258,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/comment/review/": {
+    "/timetable/lecturer/{lecturer_id}/comment/review/": {
         parameters: {
             query?: never;
             header?: never;
@@ -275,7 +275,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/photo": {
+    "/timetable/lecturer/{lecturer_id}/photo": {
         parameters: {
             query?: never;
             header?: never;
@@ -306,7 +306,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/{lecturer_id}/photo/{id}": {
+    "/timetable/lecturer/{lecturer_id}/photo/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -324,7 +324,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/photo/review": {
+    "/timetable/lecturer/photo/review": {
         parameters: {
             query?: never;
             header?: never;
@@ -341,7 +341,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lecturer/photo/review/{id}": {
+    "/timetable/lecturer/photo/review/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -358,7 +358,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/room/": {
+    "/timetable/room/": {
         parameters: {
             query?: never;
             header?: never;
@@ -376,7 +376,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/room/{id}": {
+    "/timetable/room/{id}": {
         parameters: {
             query?: never;
             header?: never;

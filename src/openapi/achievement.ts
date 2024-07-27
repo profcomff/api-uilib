@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/achievement": {
+    "/achievement/achievement": {
         parameters: {
             query?: never;
             header?: never;
@@ -25,7 +25,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/achievement/{achievement_id}/reciever": {
+    "/achievement/achievement/{achievement_id}/reciever": {
         parameters: {
             query?: never;
             header?: never;
@@ -42,7 +42,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/achievement/{achievement_id}/reciever/{user_id}": {
+    "/achievement/achievement/{achievement_id}/reciever/{user_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -66,7 +66,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/achievement/{id}": {
+    "/achievement/achievement/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -91,7 +91,7 @@ export interface paths {
         patch: operations["edit_achievement_achievement__id__patch"];
         trace?: never;
     };
-    "/achievement/{id}/picture": {
+    "/achievement/achievement/{id}/picture": {
         parameters: {
             query?: never;
             header?: never;
@@ -108,7 +108,7 @@ export interface paths {
         patch: operations["upload_picture_achievement__id__picture_patch"];
         trace?: never;
     };
-    "/user/{user_id}": {
+    "/achievement/user/{user_id}": {
         parameters: {
             query?: never;
             header?: never;
