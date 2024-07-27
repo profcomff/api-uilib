@@ -63,7 +63,6 @@ const generate = async () => {
  */
 const updateRepo = async () => {
   const git = simpleGit();
-  const date = new Date();
 
   // Ensure status
   let status = await git.status();
@@ -72,16 +71,6 @@ const updateRepo = async () => {
     return;
   }
   console.log(`${Object.keys(status.modified).length} files changed`);
-
-  // Change version in package.json file
-  const pkgJson = await PackageJson.load(".");
-  pkgJson.update({
-    version: `${date.getUTCFullYear()}.${date.getUTCMonth()+1}.${date.getUTCDate()}`,
-  });
-  pkgJson.save();
-  console.log(
-    `package.json version updated to ${date.getUTCFullYear()}.${date.getUTCMonth()+1}.${date.getUTCDate()}`
-  );
 };
 
 generate().then(() => {
