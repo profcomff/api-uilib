@@ -1,6 +1,8 @@
 const fs = require("node:fs");
 const openapiTS = require("openapi-typescript").default;
 const astToString = require("openapi-typescript").astToString;
+const simpleGit = require("simple-git");
+const PackageJson = require("@npmcli/package-json");
 
 const apis = {
   auth: "https://api.profcomff.com/auth/openapi.json",
@@ -18,9 +20,6 @@ const header = `/**
  * Do not make direct changes to the file.
  */`.trim();
 
-let i = 0;
-
-
 /**
  * Добавляет к путям префикс, соответствующий пути к корню API
  */
@@ -29,16 +28,16 @@ const updatePathsWithPrefix = (prefix, ast) => {
     for (const j in ast[i]["members"]) {
       if (ast[i]["members"][j]["name"]) {
         if (ast[i]["members"][j]["name"]["text"].startsWith("/")) {
-          ast[i]["members"][j]["name"]["text"] = prefix + ast[i]["members"][j]["name"]["text"];
+          ast[i]["members"][j]["name"]["text"] =
+            prefix + ast[i]["members"][j]["name"]["text"];
         }
       }
     }
   }
-}
-
+};
 
 /**
- * Генерирует список путей и
+ * Генерирует список путей и интерфейсов
  */
 const generate = async () => {
   for (const file in apis) {
@@ -51,15 +50,42 @@ const generate = async () => {
       excludeDeprecated: true,
     });
 
-    updatePathsWithPrefix(prefix, ast)
+    updatePathsWithPrefix(prefix, ast);
 
     const contents = astToString(ast);
 
     fs.writeFileSync(`./src/openapi/${file}.ts`, header + "\n\n" + contents);
-    // break;
   }
 };
 
+/**
+ * Проверяет есть ли изменения в репозитории, меняет версию в package-json если да
+ */
+const updateRepo = async () => {
+  const git = simpleGit();
+  const date = new Date();
+
+  // Ensure status
+  let status = await git.status();
+  if (Object.keys(status.modified).length === 0) {
+    console.log("Nothing changed");
+    return;
+  }
+  console.log(`${Object.keys(status.modified).length} files changed`);
+
+  // Change version in package.json file
+  const pkgJson = await PackageJson.load(".");
+  pkgJson.update({
+    version: `${date.getUTCFullYear()}.${date.getUTCMonth()}.${date.getUTCDate()}`,
+  });
+  pkgJson.save();
+  console.log(
+    `package.json version updated to ${date.getUTCFullYear()}.${date.getUTCMonth()}.${date.getUTCDate()}`
+  );
+};
+
 generate().then(() => {
-  console.log("Completed;");
+  updateRepo().then(() => {
+    console.log("Completed");
+  });
 });
