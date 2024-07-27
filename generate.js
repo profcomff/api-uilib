@@ -76,11 +76,11 @@ const updateRepo = async () => {
   // Change version in package.json file
   const pkgJson = await PackageJson.load(".");
   pkgJson.update({
-    version: `${date.getUTCFullYear()}.${date.getUTCMonth()}.${date.getUTCDate()}`,
+    version: `${date.getUTCFullYear()}.${date.getUTCMonth()+1}.${date.getUTCDate()}`,
   });
   pkgJson.save();
   console.log(
-    `package.json version updated to ${date.getUTCFullYear()}.${date.getUTCMonth()}.${date.getUTCDate()}`
+    `package.json version updated to ${date.getUTCFullYear()}.${date.getUTCMonth()+1}.${date.getUTCDate()}`
   );
 };
 
