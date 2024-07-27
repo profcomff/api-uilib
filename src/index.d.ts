@@ -20,5 +20,5 @@ export type paths = (
     timetablePaths &
     userdataPaths
 );
-export function createClient(baseUrl: string): ReturnType<typeof Client>;
+export function createClient(baseUrl: string): ReturnType<typeof Client<paths>>;
 export function setupAuth(newToken: string | null): void;

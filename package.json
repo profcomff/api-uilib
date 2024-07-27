@@ -12,9 +12,9 @@
       ".": "./src/index.js"
     },
     "types": "./src/index.d.ts"
-  },  
+  },
   "scripts": {
-    "generate": "openapi-typescript -c --alphabetize"
+    "generate": "node ./generate.js"
   },
   "keywords": [],
   "author": "Roman Dyakov <roman@dyakov.space>",
