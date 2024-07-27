@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/airflow/{user_id}/link": {
+    "/auth/airflow/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -38,7 +38,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/coder/{user_id}/link": {
+    "/auth/coder/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -72,7 +72,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/approve": {
+    "/auth/email/approve": {
         parameters: {
             query?: never;
             header?: never;
@@ -89,7 +89,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/login": {
+    "/auth/email/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -106,7 +106,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/registration": {
+    "/auth/email/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -123,7 +123,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/reset/email": {
+    "/auth/email/reset/email": {
         parameters: {
             query?: never;
             header?: never;
@@ -140,7 +140,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/reset/email/request": {
+    "/auth/email/reset/email/request": {
         parameters: {
             query?: never;
             header?: never;
@@ -157,7 +157,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/reset/password": {
+    "/auth/email/reset/password": {
         parameters: {
             query?: never;
             header?: never;
@@ -174,7 +174,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/reset/password/request": {
+    "/auth/email/reset/password/request": {
         parameters: {
             query?: never;
             header?: never;
@@ -191,7 +191,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/email/reset/password/restore": {
+    "/auth/email/reset/password/restore": {
         parameters: {
             query?: never;
             header?: never;
@@ -208,7 +208,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github": {
+    "/auth/github": {
         parameters: {
             query?: never;
             header?: never;
@@ -228,7 +228,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github/auth_url": {
+    "/auth/github/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -248,7 +248,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github/login": {
+    "/auth/github/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -271,7 +271,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github/redirect_url": {
+    "/auth/github/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -291,7 +291,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github/registration": {
+    "/auth/github/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -315,7 +315,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/google": {
+    "/auth/google": {
         parameters: {
             query?: never;
             header?: never;
@@ -335,7 +335,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/google/auth_url": {
+    "/auth/google/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -355,7 +355,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/google/login": {
+    "/auth/google/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -378,7 +378,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/google/redirect_url": {
+    "/auth/google/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -398,7 +398,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/google/registration": {
+    "/auth/google/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -421,7 +421,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group": {
+    "/auth/group": {
         parameters: {
             query?: never;
             header?: never;
@@ -445,7 +445,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group/{id}": {
+    "/auth/group/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -473,7 +473,7 @@ export interface paths {
         patch: operations["patch_group_group__id__patch"];
         trace?: never;
     };
-    "/lk-msu": {
+    "/auth/lk-msu": {
         parameters: {
             query?: never;
             header?: never;
@@ -493,7 +493,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lk-msu/auth_url": {
+    "/auth/lk-msu/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -513,7 +513,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lk-msu/login": {
+    "/auth/lk-msu/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -536,7 +536,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lk-msu/redirect_url": {
+    "/auth/lk-msu/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -556,7 +556,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/lk-msu/registration": {
+    "/auth/lk-msu/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -580,7 +580,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/logout": {
+    "/auth/logout": {
         parameters: {
             query?: never;
             header?: never;
@@ -597,7 +597,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/mailu/{user_id}/link": {
+    "/auth/mailu/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -631,7 +631,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/me": {
+    "/auth/me": {
         parameters: {
             query?: never;
             header?: never;
@@ -648,7 +648,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/my-msu": {
+    "/auth/my-msu": {
         parameters: {
             query?: never;
             header?: never;
@@ -668,7 +668,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/my-msu/auth_url": {
+    "/auth/my-msu/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -688,7 +688,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/my-msu/login": {
+    "/auth/my-msu/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -710,7 +710,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/my-msu/redirect_url": {
+    "/auth/my-msu/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -730,7 +730,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/my-msu/registration": {
+    "/auth/my-msu/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -754,7 +754,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/physics-msu": {
+    "/auth/physics-msu": {
         parameters: {
             query?: never;
             header?: never;
@@ -774,7 +774,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/physics-msu/auth_url": {
+    "/auth/physics-msu/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -794,7 +794,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/physics-msu/login": {
+    "/auth/physics-msu/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -817,7 +817,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/physics-msu/redirect_url": {
+    "/auth/physics-msu/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -837,7 +837,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/physics-msu/registration": {
+    "/auth/physics-msu/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -860,7 +860,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/postgres/{user_id}/link": {
+    "/auth/postgres/{user_id}/link": {
         parameters: {
             query?: never;
             header?: never;
@@ -894,7 +894,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/scope": {
+    "/auth/scope": {
         parameters: {
             query?: never;
             header?: never;
@@ -918,7 +918,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/scope/{id}": {
+    "/auth/scope/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -946,7 +946,7 @@ export interface paths {
         patch: operations["update_scope_scope__id__patch"];
         trace?: never;
     };
-    "/session": {
+    "/auth/session": {
         parameters: {
             query?: never;
             header?: never;
@@ -965,7 +965,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/session/{id}": {
+    "/auth/session/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -982,7 +982,7 @@ export interface paths {
         patch: operations["update_session_session__id__patch"];
         trace?: never;
     };
-    "/session/{token}": {
+    "/auth/session/{token}": {
         parameters: {
             query?: never;
             header?: never;
@@ -999,7 +999,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram": {
+    "/auth/telegram": {
         parameters: {
             query?: never;
             header?: never;
@@ -1019,7 +1019,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram/auth_url": {
+    "/auth/telegram/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1039,7 +1039,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram/login": {
+    "/auth/telegram/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -1062,7 +1062,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram/redirect_url": {
+    "/auth/telegram/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1082,7 +1082,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram/registration": {
+    "/auth/telegram/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -1099,7 +1099,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/user": {
+    "/auth/user": {
         parameters: {
             query?: never;
             header?: never;
@@ -1119,7 +1119,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/user/{user_id}": {
+    "/auth/user/{user_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1147,7 +1147,7 @@ export interface paths {
         patch: operations["patch_user_user__user_id__patch"];
         trace?: never;
     };
-    "/vk": {
+    "/auth/vk": {
         parameters: {
             query?: never;
             header?: never;
@@ -1167,7 +1167,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk/auth_url": {
+    "/auth/vk/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1187,7 +1187,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk/login": {
+    "/auth/vk/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -1210,7 +1210,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk/redirect_url": {
+    "/auth/vk/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1230,7 +1230,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk/registration": {
+    "/auth/vk/registration": {
         parameters: {
             query?: never;
             header?: never;
@@ -1254,7 +1254,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/yandex": {
+    "/auth/yandex": {
         parameters: {
             query?: never;
             header?: never;
@@ -1274,7 +1274,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/yandex/auth_url": {
+    "/auth/yandex/auth_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1294,7 +1294,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/yandex/login": {
+    "/auth/yandex/login": {
         parameters: {
             query?: never;
             header?: never;
@@ -1316,7 +1316,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/yandex/redirect_url": {
+    "/auth/yandex/redirect_url": {
         parameters: {
             query?: never;
             header?: never;
@@ -1336,7 +1336,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/yandex/registration": {
+    "/auth/yandex/registration": {
         parameters: {
             query?: never;
             header?: never;

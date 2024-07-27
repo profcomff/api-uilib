@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/category": {
+    "/userdata/category": {
         parameters: {
             query?: never;
             header?: never;
@@ -29,7 +29,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/category/{category_id}/param": {
+    "/userdata/category/{category_id}/param": {
         parameters: {
             query?: never;
             header?: never;
@@ -53,7 +53,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/category/{category_id}/param/{id}": {
+    "/userdata/category/{category_id}/param/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -81,7 +81,7 @@ export interface paths {
         patch: operations["patch_param_category__category_id__param__id__patch"];
         trace?: never;
     };
-    "/category/{id}": {
+    "/userdata/category/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -109,7 +109,7 @@ export interface paths {
         patch: operations["patch_category_category__id__patch"];
         trace?: never;
     };
-    "/source": {
+    "/userdata/source": {
         parameters: {
             query?: never;
             header?: never;
@@ -133,7 +133,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/source/{id}": {
+    "/userdata/source/{id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -161,7 +161,7 @@ export interface paths {
         patch: operations["patch_source_source__id__patch"];
         trace?: never;
     };
-    "/user/{id}": {
+    "/userdata/user/{id}": {
         parameters: {
             query?: never;
             header?: never;

@@ -1,3 +1,38 @@
 # Каждые 24 часа запускать кодогенерацию
 # Если есть изменения в репозитории – создавать пулл реквест
 # Если уже существует пулл реквест на обновление версии, закрыть его
+on:
+  schedule:
+    - cron: "30 00 * * *"
+
+jobs:
+  generate:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9.6.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - run: pnpm install
+
+      - run: pnpm generate
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message:
+          branch: autogen
+          title: Automated API update
+          body: |
+            Автоматика заметила изменения в API, которые нужно прокинуть на фронтенд
+
+            Проверь кодогенерацию, если все ок – вмержи изменения
+          commit-message: API codegen update

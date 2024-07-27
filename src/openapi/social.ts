@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/discord": {
+    "/social/discord": {
         parameters: {
             query?: never;
             header?: never;
@@ -24,7 +24,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/github": {
+    "/social/github": {
         parameters: {
             query?: never;
             header?: never;
@@ -44,7 +44,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group": {
+    "/social/group": {
         parameters: {
             query?: never;
             header?: never;
@@ -69,7 +69,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/group/{group_id}": {
+    "/social/group/{group_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -86,7 +86,7 @@ export interface paths {
         patch: operations["update_group_info_group__group_id__patch"];
         trace?: never;
     };
-    "/group/validation": {
+    "/social/group/validation": {
         parameters: {
             query?: never;
             header?: never;
@@ -108,7 +108,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/telegram": {
+    "/social/telegram": {
         parameters: {
             query?: never;
             header?: never;
@@ -128,7 +128,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk": {
+    "/social/vk": {
         parameters: {
             query?: never;
             header?: never;
@@ -148,7 +148,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/vk/{group_id}": {
+    "/social/vk/{group_id}": {
         parameters: {
             query?: never;
             header?: never;
