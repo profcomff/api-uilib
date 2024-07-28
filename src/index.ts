@@ -32,7 +32,7 @@ const authMiddleware: Middleware = {
     },
 };
 
-export const createClient = (baseUrl: string) => {
+export const createClient = (baseUrl: string): ReturnType<typeof Client<paths>> => {
     if (currentClient) {
         throw new Error("Client already initialized");
     }
@@ -42,6 +42,10 @@ export const createClient = (baseUrl: string) => {
         currentClient.use(authMiddleware);
     }
     return currentClient;
+}
+
+export const createTestClient = (baseUrl: string): ReturnType<typeof Client<paths>> => {
+    return Client<paths>({ baseUrl });
 }
 
 export const setupAuth = (newToken: string | null) => {
