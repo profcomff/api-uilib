@@ -27,7 +27,9 @@ let currentToken: string | undefined = undefined;
 
 const authMiddleware: Middleware = {
     async onRequest({ request, options }) {
-        request.headers.set("Authorization", currentToken);
+        if (currentToken) {
+            request.headers.set("Authorization", currentToken);
+        }
         return request;
     },
 };
@@ -38,7 +40,7 @@ export const createClient = (baseUrl: string): ReturnType<typeof Client<paths>> 
     }
 
     currentClient = Client<paths>({ baseUrl })
-    if (currentToken !== null) {
+    if (currentToken) {
         currentClient.use(authMiddleware);
     }
     return currentClient;
@@ -48,10 +50,10 @@ export const createTestClient = (baseUrl: string): ReturnType<typeof Client<path
     return Client<paths>({ baseUrl });
 }
 
-export const setupAuth = (newToken: string | null) => {
+export const setupAuth = (newToken: string | undefined) => {
     currentToken = newToken;
     if (currentClient !== undefined) {
-        if (newToken === null) {
+        if (newToken === undefined) {
             currentClient.eject(authMiddleware)
         } else {
             currentClient.use(authMiddleware);
