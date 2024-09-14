@@ -53,7 +53,7 @@ export const createTestClient = (baseUrl: string): ReturnType<typeof Client<path
 export const setupAuth = (newToken: string | undefined) => {
     currentToken = newToken;
     if (currentClient !== undefined) {
-        if (newToken === undefined) {
+        if (!newToken) {
             currentClient.eject(authMiddleware)
         } else {
             currentClient.use(authMiddleware);
