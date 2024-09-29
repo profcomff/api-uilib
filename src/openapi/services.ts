@@ -164,6 +164,12 @@ export interface components {
              */
             icon: string;
             /**
+             * Is Hidden
+             * @description Спрятана ли кнопка от пользователя
+             * @default false
+             */
+            is_hidden: boolean;
+            /**
              * Link
              * @description Ссылка, на которую перенаправляет кнопка
              */
@@ -175,12 +181,12 @@ export interface components {
             name: string;
             /**
              * Optional Scopes
-             * @description Каким скоупы желательны
+             * @description Какиеп скоупы желательны
              */
             optional_scopes?: string[] | null;
             /**
              * Required Scopes
-             * @description Каким скоупы нужны, чтобы кнопка была доступна
+             * @description Какие скоупы нужны, чтобы кнопка была доступна
              */
             required_scopes?: string[] | null;
             /** @description Тип открываемой ссылки (Ссылка приложения/Браузер в приложении/Браузер */
@@ -245,6 +251,11 @@ export interface components {
              */
             icon?: string | null;
             /**
+             * Is Hidden
+             * @description Спрятана ли кнопка от пользователя
+             */
+            is_hidden?: boolean | null;
+            /**
              * Link
              * @description Ссылка, на которую перенаправляет кнопка
              */
@@ -256,7 +267,7 @@ export interface components {
             name?: string | null;
             /**
              * Optional Scopes
-             * @description Каким скоупы желательны
+             * @description Какие скоупы желательны
              */
             optional_scopes?: string[] | null;
             /**
@@ -266,7 +277,7 @@ export interface components {
             order?: number | null;
             /**
              * Required Scopes
-             * @description Каким скоупы нужны, чтобы кнопка была доступна
+             * @description Какие скоупы нужны, чтобы кнопка была доступна
              */
             required_scopes?: string[] | null;
             /** @description Тип открываемой ссылки (Ссылка приложения/Браузер в приложении/Браузер */
@@ -276,7 +287,7 @@ export interface components {
          * ButtonView
          * @enum {string}
          */
-        ButtonView: "active" | "blocked";
+        ButtonView: "active" | "blocked" | "hidden";
         /** CategoryCreate */
         CategoryCreate: {
             /**

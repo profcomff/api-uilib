@@ -211,11 +211,9 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get All Lecturer Comments */
-        get: operations["get_all_lecturer_comments_lecturer__lecturer_id__comment__get"];
+        get?: never;
         put?: never;
-        /** Comment Lecturer */
-        post: operations["comment_lecturer_lecturer__lecturer_id__comment__post"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -229,16 +227,13 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Comment */
-        get: operations["get_comment_lecturer__lecturer_id__comment__id__get"];
+        get?: never;
         put?: never;
         post?: never;
-        /** Delete Comment */
-        delete: operations["delete_comment_lecturer__lecturer_id__comment__id__delete"];
+        delete?: never;
         options?: never;
         head?: never;
-        /** Update Comment Lecturer */
-        patch: operations["update_comment_lecturer_lecturer__lecturer_id__comment__id__patch"];
+        patch?: never;
         trace?: never;
     };
     "/timetable/lecturer/{lecturer_id}/comment/{id}/review/": {
@@ -250,8 +245,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Review Comment */
-        post: operations["review_comment_lecturer__lecturer_id__comment__id__review__post"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -265,8 +259,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Unreviewed Comments */
-        get: operations["get_unreviewed_comments_lecturer__lecturer_id__comment_review__get"];
+        get?: never;
         put?: never;
         post?: never;
         delete?: never;
@@ -1574,240 +1567,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LecturerGet"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_all_lecturer_comments_lecturer__lecturer_id__comment__get: {
-        parameters: {
-            query?: {
-                limit?: number;
-                offset?: number;
-            };
-            header?: never;
-            path: {
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["LecturerComments"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    comment_lecturer_lecturer__lecturer_id__comment__post: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LecturerCommentPost"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommentLecturer"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_comment_lecturer__lecturer_id__comment__id__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommentLecturer"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    delete_comment_lecturer__lecturer_id__comment__id__delete: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": unknown;
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    update_comment_lecturer_lecturer__lecturer_id__comment__id__patch: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                id: number;
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": components["schemas"]["LecturerCommentPatch"];
-            };
-        };
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommentLecturer"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    review_comment_lecturer__lecturer_id__comment__id__review__post: {
-        parameters: {
-            query?: {
-                action?: "Approved" | "Declined";
-            };
-            header?: never;
-            path: {
-                id: number;
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommentLecturer"];
-                };
-            };
-            /** @description Validation Error */
-            422: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["HTTPValidationError"];
-                };
-            };
-        };
-    };
-    get_unreviewed_comments_lecturer__lecturer_id__comment_review__get: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                lecturer_id: number;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful Response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommentLecturer"][];
                 };
             };
             /** @description Validation Error */
