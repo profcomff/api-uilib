@@ -13,7 +13,7 @@ const apis = {
   social: "https://api.profcomff.com/social/openapi.json",
   userdata: "https://api.profcomff.com/userdata/openapi.json",
   achievement: "https://api.profcomff.com/achievement/openapi.json",
-  rating: "https://api.test.profcomff.com/rating/openapi.json",
+  rating: "https://api.profcomff.com/rating/openapi.json",
 };
 
 const header = `/**
