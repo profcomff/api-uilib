@@ -9,6 +9,7 @@ import type { paths as servicesPaths } from "./openapi/services.ts";
 import type { paths as socialPaths } from "./openapi/social.ts";
 import type { paths as timetablePaths } from "./openapi/timetable.ts";
 import type { paths as userdataPaths } from "./openapi/userdata.ts";
+import type { paths as ratingPaths } from "./openapi/rating.js";
 
 
 export type paths = (
@@ -19,7 +20,8 @@ export type paths = (
     servicesPaths &
     socialPaths &
     timetablePaths &
-    userdataPaths
+    userdataPaths &
+    ratingPaths
 );
 
 let currentClient: ReturnType<typeof Client<paths>> | undefined = undefined;
