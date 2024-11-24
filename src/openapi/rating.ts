@@ -25,6 +25,8 @@ export interface paths {
          *
          *     `lecturer_id` - вернет все комментарии для преподавателя с конкретным id, по дефолту возвращает вообще все аппрувнутые комментарии.
          *
+         *     `user_id` - вернет все комментарии пользователя с конкретным id
+         *
          *     `unreviewed` - вернет все непроверенные комментарии, если True. По дефолту False.
          */
         get: operations["get_comments_comment_get"];
@@ -85,22 +87,28 @@ export interface paths {
         };
         /**
          * Get Lecturers
-         * @description Scopes: `["rating.lecturer.read"]`
-         *
-         *     `limit` - максимальное количество возвращаемых преподавателей
+         * @description `limit` - максимальное количество возвращаемых преподавателей
          *
          *     `offset` - нижняя граница получения преподавателей, т.е. если по дефолту первым возвращается преподаватель с условным номером N, то при наличии ненулевого offset будет возвращаться преподаватель с номером N + offset
          *
-         *     `order_by` - возможные значения `'general'`.
-         *     Если передано `'general'` - возвращается список преподавателей отсортированных по общей оценке
+         *     `order_by` - возможные значения `"mark_kindness", "mark_freebie", "mark_clarity", "mark_general", "last_name"`.
+         *     Если передано `'last_name'` - возвращается список преподавателей отсортированных по алфавиту по фамилиям
+         *     Если передано `'mark_...'` - возвращается список преподавателей отсортированных по конкретной оценке
          *
          *     `info` - возможные значения `'comments'`, `'mark'`.
          *     Если передано `'comments'`, то возвращаются одобренные комментарии к преподавателю.
          *     Если передано `'mark'`, то возвращаются общие средние оценки, а также суммарная средняя оценка по всем одобренным комментариям.
          *
          *     `subject`
-         *     Если передано `subject` - возвращает всех преподавателей, для которых переданное значение совпадает с их предметом преподавания.
+         *     Если передано `subject` - возвращает всех преподавателей, для которых переданное значение совпадает с одним из их предметов преподавания.
          *     Также возвращает всех преподавателей, у которых есть комментарий с совпадающим с данным subject.
+         *
+         *     `name`
+         *     Поле для ФИО. Если передано `name` - возвращает всех преподователей, для которых нашлись совпадения с переданной строкой
+         *
+         *     `asc_order`
+         *     Если передано true, сортировать в порядке возрастания
+         *     Иначе - в порядке убывания
          */
         get: operations["get_lecturers_lecturer_get"];
         put?: never;
@@ -170,6 +178,8 @@ export interface components {
             mark_clarity: number;
             /** Mark Freebie */
             mark_freebie: number;
+            /** Mark General */
+            mark_general: number;
             /** Mark Kindness */
             mark_kindness: number;
             /** Subject */
@@ -181,6 +191,8 @@ export interface components {
              * Format: date-time
              */
             update_ts: string;
+            /** User Id */
+            user_id?: number | null;
             /**
              * Uuid
              * Format: uuid
@@ -203,6 +215,11 @@ export interface components {
         };
         /** CommentPost */
         CommentPost: {
+            /**
+             * Is Anonymous
+             * @default true
+             */
+            is_anonymous: boolean;
             /** Mark Clarity */
             mark_clarity: number;
             /** Mark Freebie */
@@ -241,8 +258,8 @@ export interface components {
             mark_kindness?: number | null;
             /** Middle Name */
             middle_name: string;
-            /** Subject */
-            subject?: string | null;
+            /** Subjects */
+            subjects?: string[] | null;
             /** Timetable Id */
             timetable_id: number;
         };
@@ -270,8 +287,6 @@ export interface components {
             last_name?: string | null;
             /** Middle Name */
             middle_name?: string | null;
-            /** Subject */
-            subject?: string | null;
             /** Timetable Id */
             timetable_id?: number | null;
         };
@@ -285,8 +300,6 @@ export interface components {
             last_name: string;
             /** Middle Name */
             middle_name: string;
-            /** Subject */
-            subject?: string | null;
             /** Timetable Id */
             timetable_id: number;
         };
@@ -325,6 +338,7 @@ export interface operations {
                 offset?: number;
                 order_by?: "create_ts"[];
                 unreviewed?: boolean;
+                user_id?: number | null;
             };
             header?: never;
             path?: never;
@@ -485,10 +499,12 @@ export interface operations {
     get_lecturers_lecturer_get: {
         parameters: {
             query?: {
+                asc_order?: boolean;
                 info?: ("comments" | "mark")[];
                 limit?: number;
+                name?: string;
                 offset?: number;
-                order_by?: ("general" | "")[];
+                order_by?: "mark_kindness" | "mark_freebie" | "mark_clarity" | "mark_general" | "last_name";
                 subject?: string;
             };
             header?: never;

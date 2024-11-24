@@ -38,6 +38,106 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/auth/authentic": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         *  Unregister
+         * @description Отключает для пользователя метод входа
+         */
+        delete: operations["_unregister_authentic_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/authentic/auth_url": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         *  Auth Url
+         * @description URL на который происходит редирект из приложения для авторизации на стороне провайдера
+         */
+        get: operations["_auth_url_authentic_auth_url_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/authentic/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         *  Login
+         * @description Вход в пользователя с помощью аккаунта Authentic
+         */
+        post: operations["_login_authentic_login_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/authentic/redirect_url": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         *  Redirect Url
+         * @description URL на который происходит редирект после завершения входа на стороне провайдера
+         */
+        get: operations["_redirect_url_authentic_redirect_url_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/auth/authentic/registration": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         *  Register
+         * @description Создает аккаунт или привязывает существующий
+         */
+        post: operations["_register_authentic_registration_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/auth/coder/{user_id}/link": {
         parameters: {
             query?: never;
@@ -1135,7 +1235,7 @@ export interface paths {
         post?: never;
         /**
          * Delete User
-         * @description Scopes: `["auth.user.delete"]`
+         * @description Scopes: `["auth.user.delete"]` or `["auth.user.selfdelete"]` for self delete
          */
         delete: operations["delete_user_user__user_id__delete"];
         options?: never;
@@ -1379,6 +1479,17 @@ export interface components {
             token: string;
             /** User Id */
             user_id: number;
+        };
+        /** OauthResponseSchema */
+        auth_backend__auth_plugins__authentic__AuthenticAuth__OauthResponseSchema: {
+            /** Code */
+            code?: string | null;
+            /** Id Token */
+            id_token?: string | null;
+            /** Scopes */
+            scopes?: string[] | null;
+            /** Session Name */
+            session_name?: string | null;
         };
         /** OauthResponseSchema */
         auth_backend__auth_plugins__github__GithubAuth__OauthResponseSchema: {
@@ -1790,6 +1901,132 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    _unregister_authentic_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    _auth_url_authentic_auth_url_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UrlSchema"];
+                };
+            };
+        };
+    };
+    _login_authentic_login_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["auth_backend__auth_plugins__authentic__AuthenticAuth__OauthResponseSchema"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["auth_backend__auth_method__session__Session"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    _redirect_url_authentic_redirect_url_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UrlSchema"];
+                };
+            };
+        };
+    };
+    _register_authentic_registration_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["auth_backend__auth_plugins__authentic__AuthenticAuth__OauthResponseSchema"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["auth_backend__auth_method__session__Session"];
                 };
             };
             /** @description Validation Error */
