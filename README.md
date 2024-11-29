@@ -18,7 +18,7 @@ pnpm install @profcomff/api-uilib
 Используйте для совершения запросов к <https://api.test.profcomff.com> и <https://api.profcomff.com>.
 
 ```ts
-import { createClient } from "@profcomff/api-uilib";
+import { createClient, setupAuth } from "@profcomff/api-uilib";
 
 // Setup client with base API path
 // You can use environment `import.meta.env.VITE_API_URL` for example
