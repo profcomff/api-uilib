@@ -1577,6 +1577,8 @@ export interface components {
             expires?: string | null;
             /** Id */
             id: number;
+            /** Is Unbounded */
+            is_unbounded?: boolean | null;
             /**
              * Last Activity
              * Format: date-time
@@ -1745,6 +1747,8 @@ export interface components {
         SessionPost: {
             /** Expires */
             expires?: string | null;
+            /** Is Unbounded */
+            is_unbounded?: boolean | null;
             /**
              * Scopes
              * @default []

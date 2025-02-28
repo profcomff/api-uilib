@@ -33,8 +33,11 @@ export interface paths {
         put?: never;
         /**
          * Create Comment
-         * @description Создает комментарий к преподавателю в базе данных RatingAPI
+         * @description Scopes: `["rating.comment.import"]`
+         *     Создает комментарий к преподавателю в базе данных RatingAPI
          *     Для создания комментария нужно быть авторизованным
+         *
+         *     Для возможности создания комментария с указанием времени создания и изменения необходим скоуп ["rating.comment.import"]
          */
         post: operations["create_comment_comment_post"];
         delete?: never;
@@ -76,6 +79,27 @@ export interface paths {
          *     `dismissed` - комментарий отклонен, не отображается в запросе лектора
          */
         patch: operations["review_comment_comment__uuid__patch"];
+        trace?: never;
+    };
+    "/rating/comment/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import Comments
+         * @description Scopes: `["rating.comment.import"]`
+         *     Создает комментарии в базе данных RatingAPI
+         */
+        post: operations["import_comments_comment_import_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/rating/lecturer": {
@@ -183,7 +207,7 @@ export interface components {
             /** Mark Kindness */
             mark_kindness: number;
             /** Subject */
-            subject: string;
+            subject?: string | null;
             /** Text */
             text: string;
             /**
@@ -213,8 +237,39 @@ export interface components {
             /** Total */
             total: number;
         };
+        /** CommentImport */
+        CommentImport: {
+            /** Create Ts */
+            create_ts?: string | null;
+            /**
+             * Is Anonymous
+             * @default true
+             */
+            is_anonymous: boolean;
+            /** Lecturer Id */
+            lecturer_id: number;
+            /** Mark Clarity */
+            mark_clarity: number;
+            /** Mark Freebie */
+            mark_freebie: number;
+            /** Mark Kindness */
+            mark_kindness: number;
+            /** Subject */
+            subject?: string | null;
+            /** Text */
+            text: string;
+            /** Update Ts */
+            update_ts?: string | null;
+        };
+        /** CommentImportAll */
+        CommentImportAll: {
+            /** Comments */
+            comments: components["schemas"]["CommentImport"][];
+        };
         /** CommentPost */
         CommentPost: {
+            /** Create Ts */
+            create_ts?: string | null;
             /**
              * Is Anonymous
              * @default true
@@ -230,6 +285,8 @@ export interface components {
             subject: string;
             /** Text */
             text: string;
+            /** Update Ts */
+            update_ts?: string | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -301,7 +358,7 @@ export interface components {
             /** Middle Name */
             middle_name: string;
             /** Timetable Id */
-            timetable_id: number;
+            timetable_id?: number | null;
         };
         /** StatusResponseModel */
         StatusResponseModel: {
@@ -483,6 +540,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CommentGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_comments_comment_import_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CommentImportAll"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentGetAll"];
                 };
             };
             /** @description Validation Error */
