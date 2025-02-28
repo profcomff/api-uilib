@@ -21,6 +21,8 @@ export interface paths {
          * Create Category
          * @description Создать категорию пользовательских данных. Получить категорию можно будет со скоупами, имена которых в category_inp.scopes
          *     Ручка обновит документацию
+         *
+         *     Scopes: `["userdata.category.create"]`
          */
         post: operations["create_category_category_post"];
         delete?: never;
@@ -45,6 +47,8 @@ export interface paths {
         /**
          * Create Param
          * @description Создать поле внутри категории. Ответ на пользовательские данные будет такой {..., category: {...,param: '', ...}}
+         *
+         *     Scopes: `["userdata.param.create"]`
          */
         post: operations["create_param_category__category_id__param_post"];
         delete?: never;
@@ -70,6 +74,8 @@ export interface paths {
         /**
          * Delete Param
          * @description Удалить параметр внутри категории
+         *
+         *     Scopes: `["userdata.param.delete"]`
          */
         delete: operations["delete_param_category__category_id__param__id__delete"];
         options?: never;
@@ -77,6 +83,8 @@ export interface paths {
         /**
          * Patch Param
          * @description Обновить параметр внутри категории
+         *
+         *     Scopes: `["userdata.param.update"]`
          */
         patch: operations["patch_param_category__category_id__param__id__patch"];
         trace?: never;
@@ -98,6 +106,8 @@ export interface paths {
         /**
          * Delete Category
          * @description Удалить категорию
+         *
+         *     Scopes: `["userdata.category.delete"]`
          */
         delete: operations["delete_category_category__id__delete"];
         options?: never;
@@ -105,6 +115,8 @@ export interface paths {
         /**
          * Patch Category
          * @description Обновить категорию
+         *
+         *     Scopes: `["userdata.category.update"]`
          */
         patch: operations["patch_category_category__id__patch"];
         trace?: never;
@@ -125,6 +137,8 @@ export interface paths {
         /**
          * Create Source
          * @description Создать источник данных
+         *
+         *     Scopes: `["userdata.source.create"]`
          */
         post: operations["create_source_source_post"];
         delete?: never;
@@ -150,6 +164,8 @@ export interface paths {
         /**
          * Delete Source
          * @description Удалить источник данных
+         *
+         *     Scopes: `["userdata.source.delete"]`
          */
         delete: operations["delete_source_source__id__delete"];
         options?: never;
@@ -157,8 +173,33 @@ export interface paths {
         /**
          * Patch Source
          * @description Обновить источник данных
+         *
+         *     Scopes: `["userdata.source.update"]`
          */
         patch: operations["patch_source_source__id__patch"];
+        trace?: never;
+    };
+    "/userdata/user": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Users Info
+         * @description Получить информацию о пользователях.
+         *     :param users: список id юзеров, про которых нужно вернуть информацию
+         *     :param categories: список id категорий, параметры которых нужно вернуть
+         *     :return: список данных о пользователях и данных категориях
+         */
+        get: operations["get_users_info_user_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/userdata/user/{id}": {
@@ -189,7 +230,7 @@ export interface paths {
          *     Чтобы обновить от имени админиа, надо иметь скоуп `userdata.info.admin`
          *     Чтобы обновить неизменяемую информацию надо обладать скоупом `userdata.info.update`
          *     Для обновления своей информации(источник `user`) не нужны скоупы на обновление соответствующих категорий
-         *     Для обновления чужой информации от имени админа(источник  `admin`)
+         *     Для обновления чужой информации от имени админа(источник `admin`)
          *     нужны скоупы на обновление всех указанных в теле запроса категорий пользовательских данных данных
          */
         post: operations["update_user_user__id__post"];
@@ -234,6 +275,17 @@ export interface components {
             /** Update Scope */
             update_scope?: string | null;
         };
+        /** ExtendedUserInfo */
+        ExtendedUserInfo: {
+            /** Category */
+            category: string;
+            /** Param */
+            param: string;
+            /** User Id */
+            user_id: number;
+            /** Value */
+            value?: string | null;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -252,6 +304,13 @@ export interface components {
             /** Name */
             name: string;
             type: components["schemas"]["ViewType"];
+            /** Validation */
+            validation?: string | null;
+            /**
+             * Visible In User Response
+             * @default true
+             */
+            visible_in_user_response: boolean;
         };
         /** ParamPatch */
         ParamPatch: {
@@ -262,6 +321,13 @@ export interface components {
             /** Name */
             name?: string | null;
             type?: components["schemas"]["ViewType"] | null;
+            /** Validation */
+            validation?: string | null;
+            /**
+             * Visible In User Response
+             * @default true
+             */
+            visible_in_user_response: boolean;
         };
         /** ParamPost */
         ParamPost: {
@@ -272,6 +338,13 @@ export interface components {
             /** Name */
             name: string;
             type: components["schemas"]["ViewType"];
+            /** Validation */
+            validation?: string | null;
+            /**
+             * Visible In User Response
+             * @default true
+             */
+            visible_in_user_response: boolean;
         };
         /** SourceGet */
         SourceGet: {
@@ -325,6 +398,11 @@ export interface components {
             items: components["schemas"]["UserInfo"][];
             /** Source */
             source: string;
+        };
+        /** UsersInfoGet */
+        UsersInfoGet: {
+            /** Items */
+            items: components["schemas"]["ExtendedUserInfo"][];
         };
         /** ValidationError */
         ValidationError: {
@@ -830,9 +908,44 @@ export interface operations {
             };
         };
     };
+    get_users_info_user_get: {
+        parameters: {
+            query: {
+                additional_data?: number[];
+                categories: number[];
+                users: number[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UsersInfoGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_user_info_user__id__get: {
         parameters: {
-            query?: never;
+            query?: {
+                additional_data?: number[];
+            };
             header?: never;
             path: {
                 id: number;
