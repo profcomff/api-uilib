@@ -33,11 +33,8 @@ export interface paths {
         put?: never;
         /**
          * Create Comment
-         * @description Scopes: `["rating.comment.import"]`
-         *     Создает комментарий к преподавателю в базе данных RatingAPI
+         * @description Создает комментарий к преподавателю в базе данных RatingAPI
          *     Для создания комментария нужно быть авторизованным
-         *
-         *     Для возможности создания комментария с указанием времени создания и изменения необходим скоуп ["rating.comment.import"]
          */
         post: operations["create_comment_comment_post"];
         delete?: never;
@@ -70,6 +67,26 @@ export interface paths {
         options?: never;
         head?: never;
         /**
+         * Update Comment
+         * @description Позволяет изменить свой неанонимный комментарий
+         */
+        patch: operations["update_comment_comment__uuid__patch"];
+        trace?: never;
+    };
+    "/rating/comment/{uuid}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
          * Review Comment
          * @description Scopes: `["rating.comment.review"]`
          *     Проверка комментария и присваивания ему статуса по его UUID в базе данных RatingAPI
@@ -78,7 +95,7 @@ export interface paths {
          *     `approved` - комментарий одобрен и возвращается при запросе лектора
          *     `dismissed` - комментарий отклонен, не отображается в запросе лектора
          */
-        patch: operations["review_comment_comment__uuid__patch"];
+        patch: operations["review_comment_comment__uuid__review_patch"];
         trace?: never;
     };
     "/rating/comment/import": {
@@ -115,7 +132,7 @@ export interface paths {
          *
          *     `offset` - нижняя граница получения преподавателей, т.е. если по дефолту первым возвращается преподаватель с условным номером N, то при наличии ненулевого offset будет возвращаться преподаватель с номером N + offset
          *
-         *     `order_by` - возможные значения `"mark_kindness", "mark_freebie", "mark_clarity", "mark_general", "last_name"`.
+         *     `order_by` - возможные значения `"mark_weighted", "mark_kindness", "mark_freebie", "mark_clarity", "mark_general", "last_name"`.
          *     Если передано `'last_name'` - возвращается список преподавателей отсортированных по алфавиту по фамилиям
          *     Если передано `'mark_...'` - возвращается список преподавателей отсортированных по конкретной оценке
          *
@@ -237,15 +254,110 @@ export interface components {
             /** Total */
             total: number;
         };
+        /** CommentGetAllWithAllInfo */
+        CommentGetAllWithAllInfo: {
+            /**
+             * Comments
+             * @default []
+             */
+            comments: components["schemas"]["CommentGetWithAllInfo"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Total */
+            total: number;
+        };
+        /** CommentGetAllWithStatus */
+        CommentGetAllWithStatus: {
+            /**
+             * Comments
+             * @default []
+             */
+            comments: components["schemas"]["CommentGetWithStatus"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Total */
+            total: number;
+        };
+        /** CommentGetWithAllInfo */
+        CommentGetWithAllInfo: {
+            /** Approved By */
+            approved_by?: number | null;
+            /**
+             * Create Ts
+             * Format: date-time
+             */
+            create_ts: string;
+            /** Lecturer Id */
+            lecturer_id: number;
+            /** Mark Clarity */
+            mark_clarity: number;
+            /** Mark Freebie */
+            mark_freebie: number;
+            /** Mark General */
+            mark_general: number;
+            /** Mark Kindness */
+            mark_kindness: number;
+            review_status: components["schemas"]["ReviewStatus"];
+            /** Subject */
+            subject?: string | null;
+            /** Text */
+            text: string;
+            /**
+             * Update Ts
+             * Format: date-time
+             */
+            update_ts: string;
+            /** User Id */
+            user_id?: number | null;
+            /**
+             * Uuid
+             * Format: uuid
+             */
+            uuid: string;
+        };
+        /** CommentGetWithStatus */
+        CommentGetWithStatus: {
+            /**
+             * Create Ts
+             * Format: date-time
+             */
+            create_ts: string;
+            /** Lecturer Id */
+            lecturer_id: number;
+            /** Mark Clarity */
+            mark_clarity: number;
+            /** Mark Freebie */
+            mark_freebie: number;
+            /** Mark General */
+            mark_general: number;
+            /** Mark Kindness */
+            mark_kindness: number;
+            review_status: components["schemas"]["ReviewStatus"];
+            /** Subject */
+            subject?: string | null;
+            /** Text */
+            text: string;
+            /**
+             * Update Ts
+             * Format: date-time
+             */
+            update_ts: string;
+            /** User Id */
+            user_id?: number | null;
+            /**
+             * Uuid
+             * Format: uuid
+             */
+            uuid: string;
+        };
         /** CommentImport */
         CommentImport: {
             /** Create Ts */
             create_ts?: string | null;
-            /**
-             * Is Anonymous
-             * @default true
-             */
-            is_anonymous: boolean;
             /** Lecturer Id */
             lecturer_id: number;
             /** Mark Clarity */
@@ -288,6 +400,19 @@ export interface components {
             /** Update Ts */
             update_ts?: string | null;
         };
+        /** CommentUpdate */
+        CommentUpdate: {
+            /** Mark Clarity */
+            mark_clarity?: number;
+            /** Mark Freebie */
+            mark_freebie?: number;
+            /** Mark Kindness */
+            mark_kindness?: number;
+            /** Subject */
+            subject?: string;
+            /** Text */
+            text?: string;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -313,6 +438,8 @@ export interface components {
             mark_general?: number | null;
             /** Mark Kindness */
             mark_kindness?: number | null;
+            /** Mark Weighted */
+            mark_weighted?: number | null;
             /** Middle Name */
             middle_name: string;
             /** Subjects */
@@ -360,6 +487,11 @@ export interface components {
             /** Timetable Id */
             timetable_id?: number | null;
         };
+        /**
+         * ReviewStatus
+         * @enum {string}
+         */
+        ReviewStatus: "approved" | "pending" | "dismissed";
         /** StatusResponseModel */
         StatusResponseModel: {
             /** Message */
@@ -409,7 +541,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CommentGetAll"];
+                    "application/json": components["schemas"]["CommentGetAll"] | components["schemas"]["CommentGetAllWithAllInfo"] | components["schemas"]["CommentGetAllWithStatus"];
                 };
             };
             /** @description Validation Error */
@@ -520,7 +652,42 @@ export interface operations {
             };
         };
     };
-    review_comment_comment__uuid__patch: {
+    update_comment_comment__uuid__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                uuid: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CommentUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    review_comment_comment__uuid__review_patch: {
         parameters: {
             query?: {
                 review_status?: "approved" | "dismissed";
@@ -539,7 +706,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CommentGet"];
+                    "application/json": components["schemas"]["CommentGetWithAllInfo"];
                 };
             };
             /** @description Validation Error */
@@ -594,7 +761,7 @@ export interface operations {
                 limit?: number;
                 name?: string;
                 offset?: number;
-                order_by?: "mark_kindness" | "mark_freebie" | "mark_clarity" | "mark_general" | "last_name";
+                order_by?: "mark_weighted" | "mark_kindness" | "mark_freebie" | "mark_clarity" | "mark_general" | "last_name";
                 subject?: string;
             };
             header?: never;
