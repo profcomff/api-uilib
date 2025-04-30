@@ -14,6 +14,7 @@ const apis = {
   userdata: "https://api.profcomff.com/userdata/openapi.json",
   achievement: "https://api.profcomff.com/achievement/openapi.json",
   rating: "https://api.profcomff.com/rating/openapi.json",
+  rental: "https://api.profcomff.com/rental/openapi.json",
 };
 
 const header = `/**
