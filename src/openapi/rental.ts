@@ -11,7 +11,17 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Events */
+        /**
+         * Get Events
+         * @description Retrieves a list of events, with optional filtering.
+         *
+         *     Scopes: `["rental.event.view"]`
+         *
+         *     - **admin_id**: Filter events by admin ID.
+         *     - **session_id**: Filter events by session ID.
+         *
+         *     Returns a list of events.
+         */
         get: operations["get_events_event_get"];
         put?: never;
         post?: never;
@@ -21,7 +31,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/rental/items": {
+    "/rental/item": {
         parameters: {
             query?: never;
             header?: never;
@@ -30,75 +40,76 @@ export interface paths {
         };
         /**
          * Get Items
-         * @description Получает список предметов. Если указан type_id, возвращает только предметы с этим типом.
+         * @description Retrieves a list of items. If `type_id` is specified, only items of that type are returned.
          *
-         *     :param type_id: Идентификатор типа предмета (опционально).
-         *     :return: Список объектов ItemGet с информацией о предметах.
+         *     - **type_id**: The ID of the item type (optional).
+         *
+         *     Returns a list of items.
          */
-        get: operations["get_items_items_get"];
+        get: operations["get_items_item_get"];
         put?: never;
         /**
          * Create Item
-         * @description Создает новый предмет.
+         * @description Creates a new item.
          *
-         *     :param item: Данные для создания нового предмета.
-         *     :return: Объект ItemGet с информацией о созданном предмете.
-         *     :raises ObjectNotFound: Если тип предмета с указанным type_id не найден.
+         *     Scopes: `["rental.item.create"]`
+         *
+         *     - **item**: The data for the new item.
+         *
+         *     Returns the created item.
+         *
+         *     Raises **ObjectNotFound** if the item type with the specified `type_id` is not found.
          */
-        post: operations["create_item_items_post"];
+        post: operations["create_item_item_post"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/rental/items/{id}": {
+    "/rental/item/{id}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        get?: never;
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
         /**
-         * Update Item
-         * @description Обновляет статус доступности предмета по его идентификатору.
-         *
-         *     :param id: id предмета.
-         *     :param is_available: Флаг, указывающий? какой статус поставить предмету.
-         *     :return: Объект ItemGet с обновленной информацией о предмете.
-         *     :raises ObjectNotFound: Если предмет с указанным id не найден.
+         * Get Item
+         * @description Получает предмет по его идентификатору.
          */
-        patch: operations["update_item_items__id__patch"];
-        trace?: never;
-    };
-    "/rental/items/item/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
+        get: operations["get_item_item__id__get"];
         put?: never;
         post?: never;
         /**
          * Delete Item
-         * @description Удаляет предмет по его id.
+         * @description Deletes an item by its ID.
          *
-         *     :param id: id предмета.
-         *     :return: Объект StatusResponseModel с результатом выполнения операции.
-         *     :raises ObjectNotFound: Если предмет с указанным идентификатором не найден.
+         *     Scopes: `["rental.item.delete"]`
+         *
+         *     - **id**: The ID of the item.
+         *
+         *     Returns a status response.
+         *
+         *     Raises **ObjectNotFound** if the item with the specified ID is not found.
          */
-        delete: operations["delete_item_items_item__id__delete"];
+        delete: operations["delete_item_item__id__delete"];
         options?: never;
         head?: never;
-        patch?: never;
+        /**
+         * Update Item
+         * @description Updates the availability status of an item by its ID.
+         *
+         *     Scopes: `["rental.item.patch"]`
+         *
+         *     - **id**: The ID of the item.
+         *     - **is_available**: The new availability status for the item.
+         *
+         *     Returns the updated item.
+         *
+         *     Raises **ObjectNotFound** if the item with the specified ID is not found.
+         */
+        patch: operations["update_item_item__id__patch"];
         trace?: never;
     };
     "/rental/itemtype": {
@@ -110,19 +121,23 @@ export interface paths {
         };
         /**
          * Get Items Types
-         * @description Получает список всех типов предметов.
+         * @description Retrieves a list of all item types.
          *
-         *     :return: Список объектов ItemTypeGet с информацией о всех типах предметов.
-         *     :raises ObjectNotFound: Если типы предметов не найдены.
+         *     Returns a list of all item types.
+         *
+         *     Raises **ObjectNotFound** if no item types are found.
          */
         get: operations["get_items_types_itemtype_get"];
         put?: never;
         /**
          * Create Item Type
-         * @description Создает новый тип предмета.
+         * @description Creates a new item type.
          *
-         *     :param item_type_info: Данные для создания нового типа предмета.
-         *     :return: Объект ItemTypeGet с информацией о созданном типе предмета.
+         *     Scopes: `["rental.item_type.create"]`
+         *
+         *     - **item_type_info**: The data for the new item type.
+         *
+         *     Returns the created item type.
          */
         post: operations["create_item_type_itemtype_post"];
         delete?: never;
@@ -140,35 +155,44 @@ export interface paths {
         };
         /**
          * Get Item Type
-         * @description Получает информацию о типе предмета по его id.
+         * @description Retrieves information about an item type by its ID.
          *
-         *     :param id: Идентификатор типа предмета.
-         *     :return: Объект ItemTypeGet с информацией о типе предмета.
-         *     :raises ObjectNotFound: Если тип предмета с указанным идентификатором не найден.
+         *     - **id**: The ID of the item type.
+         *
+         *     Returns the item type information.
+         *
+         *     Raises **ObjectNotFound** if the item type with the specified ID is not found.
          */
         get: operations["get_item_type_itemtype__id__get"];
         put?: never;
         post?: never;
         /**
          * Delete Item Type
-         * @description Удаляет тип предмета по его id и все предметы этого типа.
+         * @description Deletes an item type by its ID.
          *
-         *     :param id: Идентификатор типа предмета.
-         *     :param user: Пользователь, авторизованный для выполнения действия.
-         *     :return: Объект StatusResponseModel с результатом выполнения операции.
-         *     :raises ObjectNotFound: Если тип предмета с указанным идентификатором не найден.
+         *     Scopes: `["rental.item_type.delete"]`
+         *
+         *     - **id**: The ID of the item type.
+         *
+         *     Returns a status response.
+         *
+         *     Raises **ObjectNotFound** if the item type with the specified ID is not found.
          */
         delete: operations["delete_item_type_itemtype__id__delete"];
         options?: never;
         head?: never;
         /**
          * Update Item Type
-         * @description Обновляет информацию о типе предмета по его идентификатору.
+         * @description Updates the information of an item type by its ID.
          *
-         *     :param id: Идентификатор типа предмета.
-         *     :param item_type_info: Данные для обновления типа предмета.
-         *     :return: Объект ItemTypeGet с обновленной информацией о типе предмета.
-         *     :raises ObjectNotFound: Если тип предмета с указанным идентификатором не найден.
+         *     Scopes: `["rental.item_type.update"]`
+         *
+         *     - **id**: The ID of the item type.
+         *     - **item_type_info**: The data to update the item type with.
+         *
+         *     Returns the updated item type.
+         *
+         *     Raises **ObjectNotFound** if the item type with the specified ID is not found.
          */
         patch: operations["update_item_type_itemtype__id__patch"];
         trace?: never;
@@ -182,15 +206,18 @@ export interface paths {
         };
         /**
          * Get Rental Sessions
-         * @description Получает список сессий аренды с возможностью фильтрации по статусу.
+         * @description Retrieves a list of rental sessions with optional status filtering.
          *
-         *     :param is_reserved: Флаг, показывать зарезервированные сессии.
-         *     :param is_canceled: Флаг, показывать отмененные сессии.
-         *     :param is_dismissed: Флаг, показывать отклоненные сессии.
-         *     :param is_overdue: Флаг, показывать просроченные сессии.
-         *     :param is_returned: Флаг, показывать возвращенные сессии.
-         *     :param is_active: Флаг, показывать активные сессии.
-         *     :return: Список объектов RentalSessionGet с информацией о сессиях аренды.
+         *     Scopes: `["rental.session.admin"]`
+         *
+         *     - **is_reserved**: Filter by reserved sessions.
+         *     - **is_canceled**: Filter by canceled sessions.
+         *     - **is_dismissed**: Filter by dismissed sessions.
+         *     - **is_overdue**: Filter by overdue sessions.
+         *     - **is_returned**: Filter by returned sessions.
+         *     - **is_active**: Filter by active sessions.
+         *
+         *     Returns a list of rental sessions.
          */
         get: operations["get_rental_sessions_rental_sessions_get"];
         put?: never;
@@ -212,12 +239,14 @@ export interface paths {
         put?: never;
         /**
          * Create Rental Session
-         * @description Создает новую сессию аренды для указанного типа предмета.
+         * @description Creates a new rental session for the specified item type.
          *
-         *     :param item_type_id: Идентификатор типа предмета.
-         *     :param background_tasks: Фоновые задачи для выполнения.
-         *     :return: Объект RentalSessionGet с информацией о созданной сессии аренды.
-         *     :raises NoneAvailable: Если нет доступных предметов указанного типа.
+         *     - **item_type_id**: The ID of the item type to rent.
+         *     - **background_tasks**: Background tasks to be executed.
+         *
+         *     Returns the created rental session.
+         *
+         *     Raises **NoneAvailable** if no items of the specified type are available.
          */
         post: operations["create_rental_session_rental_sessions__item_type_id__post"];
         delete?: never;
@@ -233,7 +262,14 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Rental Session */
+        /**
+         * Get Rental Session
+         * @description Retrieves a specific rental session by its ID.
+         *
+         *     - **session_id**: The ID of the rental session.
+         *
+         *     Returns the rental session.
+         */
         get: operations["get_rental_session_rental_sessions__session_id__get"];
         put?: never;
         post?: never;
@@ -242,12 +278,16 @@ export interface paths {
         head?: never;
         /**
          * Update Rental Session
-         * @description Обновляет информацию о сессии аренды.
+         * @description Updates the information of a rental session.
          *
-         *     :param session_id: Идентификатор сессии аренды.
-         *     :param update_data: Данные для обновления сессии.
-         *     :return: Объект RentalSessionGet с обновленной информацией о сессии аренды.
-         *     :raises ObjectNotFound: Если сессия с указанным идентификатором не найдена.
+         *     Scopes: `["rental.session.admin"]`
+         *
+         *     - **session_id**: The ID of the rental session to update.
+         *     - **update_data**: The data to update the session with.
+         *
+         *     Returns the updated rental session.
+         *
+         *     Raises **ObjectNotFound** if the session with the specified ID is not found.
          */
         patch: operations["update_rental_session_rental_sessions__session_id__patch"];
         trace?: never;
@@ -264,11 +304,13 @@ export interface paths {
         post?: never;
         /**
          * Cancel Rental Session
-         * @description Отменяет сессию в статусе RESERVED. Отменить может только сам юзер
+         * @description Cancels a session in the RESERVED status. Can only be canceled by the user who created it.
          *
-         *     :param session_id: Идентификатор сессии аренды
-         *     :raises ForbiddenAction: Если пользователь не владелец или статус не RESERVED
-         *     :return: Объект отмененной сессии аренды
+         *     - **session_id**: The ID of the rental session to cancel.
+         *
+         *     Returns the canceled rental session.
+         *
+         *     Raises **ForbiddenAction** if the user is not the owner or the session is not in RESERVED status.
          */
         delete: operations["cancel_rental_session_rental_sessions__session_id__cancel_delete"];
         options?: never;
@@ -291,13 +333,19 @@ export interface paths {
         head?: never;
         /**
          * Accept End Rental Session
-         * @description Завершает сессию аренды, изменяя её статус на RETURNED. При необходимости выдает страйк.
-         *     :param session_id: Идентификатор сессии аренды.
-         *     :param with_strike: Флаг, указывающий, нужно ли выдать страйк.
-         *     :param strike_reason: Причина выдачи страйка.
-         *     :return: Объект RentalSessionGet с обновленной информацией о сессии аренды.
-         *     :raises ObjectNotFound: Если сессия с указанным идентификатором не найдена.
-         *     :raises InactiveSession: Если сессия не активна.
+         * @description Ends a rental session, changing its status to RETURNED. Issues a strike if specified.
+         *
+         *     Scopes: `["rental.session.admin"]`
+         *
+         *     - **session_id**: The ID of the rental session to end.
+         *     - **with_strike**: A flag indicating whether to issue a strike.
+         *     - **strike_reason**: The reason for the strike.
+         *
+         *     Returns the updated rental session.
+         *
+         *     Raises:
+         *     - **ObjectNotFound**: If the session with the specified ID is not found.
+         *     - **InactiveSession**: If the session is not active.
          */
         patch: operations["accept_end_rental_session_rental_sessions__session_id__return_patch"];
         trace?: never;
@@ -317,12 +365,15 @@ export interface paths {
         head?: never;
         /**
          * Start Rental Session
-         * @description Начинает сессию аренды, изменяя её статус на ACTIVE.
+         * @description Starts a rental session, changing its status to ACTIVE.
          *
-         *     :param session_id: Идентификатор сессии аренды.
+         *     Scopes: `["rental.session.admin"]`
          *
-         *     :return: Объект RentalSessionGet с обновленной информацией о сессии аренды.
-         *     :raises ObjectNotFound: Если сессия с указанным идентификатором не найдена.
+         *     - **session_id**: The ID of the rental session to start.
+         *
+         *     Returns the updated rental session.
+         *
+         *     Raises **ObjectNotFound** if the session with the specified ID is not found.
          */
         patch: operations["start_rental_session_rental_sessions__session_id__start_patch"];
         trace?: never;
@@ -336,10 +387,13 @@ export interface paths {
         };
         /**
          * Get User Sessions
-         * @description Получает список сессий аренды для указанного пользователя.
+         * @description Retrieves a list of rental sessions for the specified user.
          *
-         *     :param user_id: id пользователя.
-         *     :return: Список объектов RentalSessionGet с информацией о сессиях аренды.
+         *     Scopes: `["rental.session.admin"]`
+         *
+         *     - **user_id**: The ID of the user.
+         *
+         *     Returns a list of rental sessions.
          */
         get: operations["get_user_sessions_rental_sessions_user__user_id__get"];
         put?: never;
@@ -357,10 +411,33 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Strikes */
+        /**
+         * Get Strikes
+         * @description Retrieves a list of strikes with optional filtering.
+         *
+         *     Scopes: `["rental.strike.read"]`
+         *
+         *     - **admin_id**: Filter strikes by admin ID.
+         *     - **session_id**: Filter strikes by session ID.
+         *     - **from_date**: Filter strikes created after this date.
+         *     - **to_date**: Filter strikes created before this date.
+         *
+         *     Returns a list of strikes.
+         *
+         *     Raises **DateRangeError** if only one of `from_date` or `to_date` is provided.
+         */
         get: operations["get_strikes_strike_get"];
         put?: never;
-        /** Create Strike */
+        /**
+         * Create Strike
+         * @description Creates a new strike.
+         *
+         *     Scopes: `["rental.strike.create"]`
+         *
+         *     - **strike_info**: The data for the new strike.
+         *
+         *     Returns the created strike.
+         */
         post: operations["create_strike_strike_post"];
         delete?: never;
         options?: never;
@@ -378,7 +455,18 @@ export interface paths {
         get?: never;
         put?: never;
         post?: never;
-        /** Delete Strike */
+        /**
+         * Delete Strike
+         * @description Deletes a strike by its ID.
+         *
+         *     Scopes: `["rental.strike.delete"]`
+         *
+         *     - **id**: The ID of the strike to delete.
+         *
+         *     Returns a status response.
+         *
+         *     Raises **ObjectNotFound** if the strike with the specified ID is not found.
+         */
         delete: operations["delete_strike_strike__id__delete"];
         options?: never;
         head?: never;
@@ -392,7 +480,14 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get User Strikes */
+        /**
+         * Get User Strikes
+         * @description Retrieves a list of strikes for a specific user.
+         *
+         *     - **user_id**: The ID of the user.
+         *
+         *     Returns a list of strikes.
+         */
         get: operations["get_user_strikes_strike_user__user_id__get"];
         put?: never;
         post?: never;
@@ -531,10 +626,10 @@ export interface components {
             /** Admin Id */
             admin_id: number;
             /**
-             * Created Ts
+             * Create Ts
              * Format: date-time
              */
-            created_ts: string;
+            create_ts: string;
             /** Id */
             id: number;
             /** Reason */
@@ -606,7 +701,7 @@ export interface operations {
             };
         };
     };
-    get_items_items_get: {
+    get_items_item_get: {
         parameters: {
             query?: {
                 type_id?: number;
@@ -637,7 +732,7 @@ export interface operations {
             };
         };
     };
-    create_item_items_post: {
+    create_item_item_post: {
         parameters: {
             query?: never;
             header?: never;
@@ -670,12 +765,9 @@ export interface operations {
             };
         };
     };
-    update_item_items__id__patch: {
+    get_item_item__id__get: {
         parameters: {
-            query?: {
-                /** @description Флаг доступен ли предмет */
-                is_available?: boolean;
-            };
+            query?: never;
             header?: never;
             path: {
                 id: number;
@@ -704,7 +796,7 @@ export interface operations {
             };
         };
     };
-    delete_item_items_item__id__delete: {
+    delete_item_item__id__delete: {
         parameters: {
             query?: never;
             header?: never;
@@ -722,6 +814,40 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StatusResponseModel"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_item_item__id__patch: {
+        parameters: {
+            query?: {
+                /** @description Flag indicating if the item is available */
+                is_available?: boolean;
+            };
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemGet"];
                 };
             };
             /** @description Validation Error */
@@ -888,17 +1014,17 @@ export interface operations {
     get_rental_sessions_rental_sessions_get: {
         parameters: {
             query?: {
-                /** @description Флаг, показывать активные */
+                /** @description Filter by active sessions. */
                 is_active?: boolean;
-                /** @description Флаг, показывать отмененные */
+                /** @description Filter by canceled sessions. */
                 is_canceled?: boolean;
-                /** @description Флаг, показывать отклоненные */
+                /** @description Filter by dismissed sessions. */
                 is_dismissed?: boolean;
-                /** @description Флаг, показывать просроченные */
+                /** @description Filter by overdue sessions. */
                 is_overdue?: boolean;
-                /** @description флаг, показывать заявки */
+                /** @description Filter by reserved sessions. */
                 is_reserved?: boolean;
-                /** @description Флаг, показывать вернутые */
+                /** @description Filter by returned sessions. */
                 is_returned?: boolean;
             };
             header?: never;
@@ -932,7 +1058,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                item_type_id: unknown;
+                item_type_id: number;
             };
             cookie?: never;
         };
@@ -1058,14 +1184,14 @@ export interface operations {
     accept_end_rental_session_rental_sessions__session_id__return_patch: {
         parameters: {
             query?: {
-                /** @description Описание причины страйка */
+                /** @description The reason for the strike. */
                 strike_reason?: string;
-                /** @description Флаг, определяющий выдачу страйка */
+                /** @description A flag indicating whether to issue a strike. */
                 with_strike?: boolean;
             };
             header?: never;
             path: {
-                session_id: unknown;
+                session_id: number;
             };
             cookie?: never;
         };
@@ -1096,7 +1222,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                session_id: unknown;
+                session_id: number;
             };
             cookie?: never;
         };
@@ -1127,7 +1253,7 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                user_id: unknown;
+                user_id: number;
             };
             cookie?: never;
         };
