@@ -216,7 +216,7 @@ export interface paths {
          *     - **is_overdue**: Filter by overdue sessions.
          *     - **is_returned**: Filter by returned sessions.
          *     - **is_active**: Filter by active sessions.
-         *
+         *     - **user_id**: User_id to get sessions
          *     Returns a list of rental sessions.
          */
         get: operations["get_rental_sessions_rental_sessions_get"];
@@ -239,14 +239,9 @@ export interface paths {
         put?: never;
         /**
          * Create Rental Session
-         * @description Creates a new rental session for the specified item type.
-         *
-         *     - **item_type_id**: The ID of the item type to rent.
-         *     - **background_tasks**: Background tasks to be executed.
-         *
-         *     Returns the created rental session.
-         *
-         *     Raises **NoneAvailable** if no items of the specified type are available.
+         * @description Создает новую сессию аренды для указанного типа предмета.
+         *     :raises NoneAvailable: Если нет доступных предметов указанного типа.
+         *     :raises SessionExists: Если у пользователя уже есть сессия с указанным типом предмета.
          */
         post: operations["create_rental_session_rental_sessions__item_type_id__post"];
         delete?: never;
@@ -262,14 +257,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Get Rental Session
-         * @description Retrieves a specific rental session by its ID.
-         *
-         *     - **session_id**: The ID of the rental session.
-         *
-         *     Returns the rental session.
-         */
+        /** Get Rental Session */
         get: operations["get_rental_session_rental_sessions__session_id__get"];
         put?: never;
         post?: never;
@@ -378,7 +366,7 @@ export interface paths {
         patch: operations["start_rental_session_rental_sessions__session_id__start_patch"];
         trace?: never;
     };
-    "/rental/rental-sessions/user/{user_id}": {
+    "/rental/rental-sessions/user/me": {
         parameters: {
             query?: never;
             header?: never;
@@ -386,16 +374,18 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get User Sessions
-         * @description Retrieves a list of rental sessions for the specified user.
+         * Get My Sessions
+         * @description Retrieves a list of rental sessions for the user with optional status filtering.
          *
-         *     Scopes: `["rental.session.admin"]`
-         *
-         *     - **user_id**: The ID of the user.
-         *
+         *     - **is_reserved**: Filter by reserved sessions.
+         *     - **is_canceled**: Filter by canceled sessions.
+         *     - **is_dismissed**: Filter by dismissed sessions.
+         *     - **is_overdue**: Filter by overdue sessions.
+         *     - **is_returned**: Filter by returned sessions.
+         *     - **is_active**: Filter by active sessions.
          *     Returns a list of rental sessions.
          */
-        get: operations["get_user_sessions_rental_sessions_user__user_id__get"];
+        get: operations["get_my_sessions_rental_sessions_user_me_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -586,6 +576,8 @@ export interface components {
             id: number;
             /** Item Id */
             item_id: number;
+            /** Item Type Id */
+            item_type_id: number;
             /**
              * Reservation Ts
              * Format: date-time
@@ -594,6 +586,8 @@ export interface components {
             /** Start Ts */
             start_ts: string | null;
             status: components["schemas"]["RentStatus"];
+            /** Strike Id */
+            strike_id?: number | null;
             /** User Id */
             user_id: number;
         };
@@ -611,7 +605,7 @@ export interface components {
          * RentStatus
          * @enum {string}
          */
-        RentStatus: "reserved" | "active" | "canceled" | "overdue" | "returned" | "dismissed";
+        RentStatus: "reserved" | "active" | "canceled" | "overdue" | "returned" | "dismissed" | "expired";
         /** StatusResponseModel */
         StatusResponseModel: {
             /** Message */
@@ -1026,6 +1020,8 @@ export interface operations {
                 is_reserved?: boolean;
                 /** @description Filter by returned sessions. */
                 is_returned?: boolean;
+                /** @description User_id to get sessions */
+                user_id?: number;
             };
             header?: never;
             path?: never;
@@ -1248,13 +1244,24 @@ export interface operations {
             };
         };
     };
-    get_user_sessions_rental_sessions_user__user_id__get: {
+    get_my_sessions_rental_sessions_user_me_get: {
         parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                user_id: number;
+            query?: {
+                /** @description Флаг, показывать активные */
+                is_active?: boolean;
+                /** @description Флаг, показывать отмененные */
+                is_canceled?: boolean;
+                /** @description Флаг, показывать отклоненные */
+                is_dismissed?: boolean;
+                /** @description Флаг, показывать просроченные */
+                is_overdue?: boolean;
+                /** @description флаг, показывать заявки */
+                is_reserved?: boolean;
+                /** @description Флаг, показывать вернутые */
+                is_returned?: boolean;
             };
+            header?: never;
+            path?: never;
             cookie?: never;
         };
         requestBody?: never;
