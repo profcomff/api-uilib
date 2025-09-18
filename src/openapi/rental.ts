@@ -197,6 +197,38 @@ export interface paths {
         patch: operations["update_item_type_itemtype__id__patch"];
         trace?: never;
     };
+    "/rental/itemtype/available/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Make Item Type Available
+         * @description Делает один предмет доступным по ID типа предмета.
+         *
+         *     Скоупы: `["rental.item_type.update"]`
+         *
+         *     - **id**: ID типа предмета.
+         *     - **count**: Абсолютное количество предметов, которые нужно сделать доступными.
+         *     Если доступных меньше, делает больше доступных. Если доступных больше, делает меньше доступных.
+         *     Если нет возможности сделать count доступных, делает доступным максимально возможное количество.
+         *     Возвращает id всех возвращенных предметов и их количество.
+         *
+         *
+         *
+         *     Вызывает **ObjectNotFound**, если тип предмета с указанным ID не найден.
+         */
+        patch: operations["make_item_type_available_itemtype_available__id__patch"];
+        trace?: never;
+    };
     "/rental/rental-sessions": {
         parameters: {
             query?: never;
@@ -540,8 +572,19 @@ export interface components {
             /** Type Id */
             type_id: number;
         };
+        /** ItemTypeAvailable */
+        ItemTypeAvailable: {
+            /** Item Ids */
+            item_ids: number[];
+            /** Items Changed */
+            items_changed: number;
+            /** Total Available */
+            total_available: number;
+        };
         /** ItemTypeGet */
         ItemTypeGet: {
+            /** Availability */
+            availability?: boolean | null;
             /** Description */
             description?: string | null;
             /** Free Items Count */
@@ -1005,6 +1048,39 @@ export interface operations {
             };
         };
     };
+    make_item_type_available_itemtype_available__id__patch: {
+        parameters: {
+            query: {
+                count: number;
+            };
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemTypeAvailable"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_rental_sessions_rental_sessions_get: {
         parameters: {
             query?: {
@@ -1020,6 +1096,8 @@ export interface operations {
                 is_reserved?: boolean;
                 /** @description Filter by returned sessions. */
                 is_returned?: boolean;
+                /** @description Item_type_id to get sessions */
+                item_type_id?: number;
                 /** @description User_id to get sessions */
                 user_id?: number;
             };
@@ -1259,6 +1337,8 @@ export interface operations {
                 is_reserved?: boolean;
                 /** @description Флаг, показывать вернутые */
                 is_returned?: boolean;
+                /** @description ID типа предмета */
+                item_type_id?: number;
             };
             header?: never;
             path?: never;
