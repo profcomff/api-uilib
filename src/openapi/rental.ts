@@ -248,6 +248,7 @@ export interface paths {
          *     - **is_overdue**: Filter by overdue sessions.
          *     - **is_returned**: Filter by returned sessions.
          *     - **is_active**: Filter by active sessions.
+         *     - **is_expired**: Filter by expired sessions.
          *     - **user_id**: User_id to get sessions
          *     Returns a list of rental sessions.
          */
@@ -272,6 +273,8 @@ export interface paths {
         /**
          * Create Rental Session
          * @description Создает новую сессию аренды для указанного типа предмета.
+         *
+         *     :param item_type_id: Идентификатор типа предмета.
          *     :raises NoneAvailable: Если нет доступных предметов указанного типа.
          *     :raises SessionExists: Если у пользователя уже есть сессия с указанным типом предмета.
          */
@@ -415,6 +418,7 @@ export interface paths {
          *     - **is_overdue**: Filter by overdue sessions.
          *     - **is_returned**: Filter by returned sessions.
          *     - **is_active**: Filter by active sessions.
+         *     - **is_expired**: Filter by expired sessions.
          *     Returns a list of rental sessions.
          */
         get: operations["get_my_sessions_rental_sessions_user_me_get"];
@@ -633,6 +637,8 @@ export interface components {
             strike_id?: number | null;
             /** User Id */
             user_id: number;
+            /** User Phone */
+            user_phone?: string | null;
         };
         /** RentalSessionPatch */
         RentalSessionPatch: {
@@ -1084,21 +1090,23 @@ export interface operations {
     get_rental_sessions_rental_sessions_get: {
         parameters: {
             query?: {
-                /** @description Filter by active sessions. */
+                /** @description Флаг, показывать активные */
                 is_active?: boolean;
-                /** @description Filter by canceled sessions. */
+                /** @description Флаг, показывать отмененные */
                 is_canceled?: boolean;
-                /** @description Filter by dismissed sessions. */
+                /** @description Флаг, показывать отклоненные */
                 is_dismissed?: boolean;
-                /** @description Filter by overdue sessions. */
+                /** @description Флаг, показывать просроченные */
+                is_expired?: boolean;
+                /** @description Флаг, показывать просроченные */
                 is_overdue?: boolean;
-                /** @description Filter by reserved sessions. */
+                /** @description флаг, показывать заявки */
                 is_reserved?: boolean;
-                /** @description Filter by returned sessions. */
+                /** @description Флаг, показывать вернутые */
                 is_returned?: boolean;
-                /** @description Item_type_id to get sessions */
+                /** @description ID типа предмета */
                 item_type_id?: number;
-                /** @description User_id to get sessions */
+                /** @description User_id для получения сессий */
                 user_id?: number;
             };
             header?: never;
@@ -1331,6 +1339,8 @@ export interface operations {
                 is_canceled?: boolean;
                 /** @description Флаг, показывать отклоненные */
                 is_dismissed?: boolean;
+                /** @description Флаг, показывать просроченные */
+                is_expired?: boolean;
                 /** @description Флаг, показывать просроченные */
                 is_overdue?: boolean;
                 /** @description флаг, показывать заявки */
