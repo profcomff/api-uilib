@@ -177,6 +177,8 @@ export interface paths {
          *     Returns a status response.
          *
          *     Raises **ObjectNotFound** if the item type with the specified ID is not found.
+         *
+         *     Raises **ForbiddenAction** if the item type with the specified ID has items.
          */
         delete: operations["delete_item_type_itemtype__id__delete"];
         options?: never;
@@ -273,6 +275,8 @@ export interface paths {
         /**
          * Create Rental Session
          * @description Создает новую сессию аренды для указанного типа предмета.
+         *
+         *     Cкоупы: `["rental.session.create"]`
          *
          *     :param item_type_id: Идентификатор типа предмета.
          *     :raises NoneAvailable: Если нет доступных предметов указанного типа.
@@ -463,6 +467,8 @@ export interface paths {
          *     - **strike_info**: The data for the new strike.
          *
          *     Returns the created strike.
+         *
+         *     If session does not exist returns ObjectNotFound.
          */
         post: operations["create_strike_strike_post"];
         delete?: never;
@@ -587,12 +593,15 @@ export interface components {
         };
         /** ItemTypeGet */
         ItemTypeGet: {
-            /** Availability */
-            availability?: boolean | null;
+            /**
+             * Availability
+             * @default false
+             */
+            availability: boolean;
+            /** Available Items Count */
+            available_items_count?: number | null;
             /** Description */
             description?: string | null;
-            /** Free Items Count */
-            free_items_count?: number | null;
             /** Id */
             id: number;
             /** Image Url */
@@ -617,6 +626,8 @@ export interface components {
             admin_close_id: number | null;
             /** Admin Open Id */
             admin_open_id: number | null;
+            /** Deadline Ts */
+            deadline_ts?: string | null;
             /** End Ts */
             end_ts: string | null;
             /** Id */
@@ -635,6 +646,8 @@ export interface components {
             status: components["schemas"]["RentStatus"];
             /** Strike Id */
             strike_id?: number | null;
+            /** User Fullname */
+            user_fullname?: string | null;
             /** User Id */
             user_id: number;
             /** User Phone */
@@ -1301,10 +1314,13 @@ export interface operations {
     };
     start_rental_session_rental_sessions__session_id__start_patch: {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description Deadline timestamp */
+                deadline_ts?: string | null;
+            };
             header?: never;
             path: {
-                session_id: number;
+                session_id: unknown;
             };
             cookie?: never;
         };
@@ -1461,9 +1477,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": {
-                        [key: string]: unknown;
-                    };
+                    "application/json": components["schemas"]["StatusResponseModel"];
                 };
             };
             /** @description Validation Error */

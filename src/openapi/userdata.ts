@@ -299,6 +299,11 @@ export interface components {
             changeable: boolean;
             /** Id */
             id: number;
+            /**
+             * Is Public
+             * @default false
+             */
+            is_public: boolean;
             /** Is Required */
             is_required: boolean;
             /** Name */
@@ -316,6 +321,11 @@ export interface components {
         ParamPatch: {
             /** Changeable */
             changeable?: boolean | null;
+            /**
+             * Is Public
+             * @default false
+             */
+            is_public: boolean;
             /** Is Required */
             is_required?: boolean | null;
             /** Name */
@@ -333,6 +343,11 @@ export interface components {
         ParamPost: {
             /** Changeable */
             changeable: boolean;
+            /**
+             * Is Public
+             * @default false
+             */
+            is_public: boolean;
             /** Is Required */
             is_required: boolean;
             /** Name */
@@ -943,9 +958,7 @@ export interface operations {
     };
     get_user_info_user__id__get: {
         parameters: {
-            query?: {
-                additional_data?: number[];
-            };
+            query?: never;
             header?: never;
             path: {
                 id: number;
