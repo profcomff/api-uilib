@@ -302,6 +302,8 @@ export interface components {
              * Format: date-time
              */
             update_ts: string;
+            /** User Fullname */
+            user_fullname?: string | null;
             /** User Id */
             user_id?: number | null;
             /**
@@ -325,21 +327,7 @@ export interface components {
             total: number;
         };
         /** CommentGetAllWithAllInfo */
-        "CommentGetAllWithAllInfo-Input": {
-            /**
-             * Comments
-             * @default []
-             */
-            comments: components["schemas"]["CommentGetWithAllInfo"][];
-            /** Limit */
-            limit: number;
-            /** Offset */
-            offset: number;
-            /** Total */
-            total: number;
-        };
-        /** CommentGetAllWithAllInfo */
-        "CommentGetAllWithAllInfo-Output": {
+        CommentGetAllWithAllInfo: {
             /**
              * Comments
              * @default []
@@ -353,21 +341,7 @@ export interface components {
             total: number;
         };
         /** CommentGetAllWithStatus */
-        "CommentGetAllWithStatus-Input": {
-            /**
-             * Comments
-             * @default []
-             */
-            comments: components["schemas"]["CommentGetWithStatus"][];
-            /** Limit */
-            limit: number;
-            /** Offset */
-            offset: number;
-            /** Total */
-            total: number;
-        };
-        /** CommentGetAllWithStatus */
-        "CommentGetAllWithStatus-Output": {
+        CommentGetAllWithStatus: {
             /**
              * Comments
              * @default []
@@ -413,6 +387,8 @@ export interface components {
              * Format: date-time
              */
             update_ts: string;
+            /** User Fullname */
+            user_fullname?: string | null;
             /** User Id */
             user_id?: number | null;
             /**
@@ -452,6 +428,8 @@ export interface components {
              * Format: date-time
              */
             update_ts: string;
+            /** User Fullname */
+            user_fullname?: string | null;
             /** User Id */
             user_id?: number | null;
             /**
@@ -694,7 +672,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["CommentGetAll"] | components["schemas"]["CommentGetAllWithAllInfo-Output"] | components["schemas"]["CommentGetAllWithStatus-Output"];
+                    "application/json": components["schemas"]["CommentGetAll"] | components["schemas"]["CommentGetAllWithAllInfo"] | components["schemas"]["CommentGetAllWithStatus"];
                 };
             };
             /** @description Validation Error */
