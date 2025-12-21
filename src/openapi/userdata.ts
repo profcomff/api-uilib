@@ -4,6 +4,36 @@
  */
 
 export interface paths {
+    "/userdata/admin/user/{user_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get User Card
+         * @description Получает профсоюзную информацию пользователя.
+         *
+         *     Скоупы: `["userdata.info.admin"]`
+         */
+        get: operations["get_user_card_admin_user__user_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update User Card
+         * @description Обновить данные в профсоюзной информации пользователя.
+         *
+         *     Скоупы: `["userdata.info.admin"]`
+         *
+         *      - **user_id**: id пользователя.
+         */
+        patch: operations["update_user_card_admin_user__user_id__patch"];
+        trace?: never;
+    };
     "/userdata/category": {
         parameters: {
             query?: never;
@@ -393,6 +423,26 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** UserCardGet */
+        UserCardGet: {
+            /** Full Name */
+            full_name?: string | null;
+            /** Is Union Member */
+            is_union_member: string;
+            /** Student Card Number */
+            student_card_number?: string | null;
+            /** Union Card Number */
+            union_card_number?: string | null;
+            /** User Id */
+            user_id: number;
+        };
+        /** UserCardUpdate */
+        UserCardUpdate: {
+            /** Full Name */
+            full_name?: string | null;
+            /** Student Card Number */
+            student_card_number?: string | null;
+        };
         /** UserInfo */
         UserInfo: {
             /** Category */
@@ -446,6 +496,72 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    get_user_card_admin_user__user_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserCardGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_user_card_admin_user__user_id__patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UserCardUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatusResponseModel"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_categories_category_get: {
         parameters: {
             query?: {

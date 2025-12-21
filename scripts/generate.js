@@ -11,7 +11,7 @@ const apis = {
   services: "https://api.profcomff.com/services/openapi.json",
   print: "https://api.profcomff.com/print/openapi.json",
   social: "https://api.profcomff.com/social/openapi.json",
-  userdata: "https://api.profcomff.com/userdata/openapi.json",
+  userdata: "https://api.test.profcomff.com/userdata/openapi.json",
   achievement: "https://api.profcomff.com/achievement/openapi.json",
   rating: "https://api.test.profcomff.com/rating/openapi.json",
   rental: "https://api.profcomff.com/rental/openapi.json",
