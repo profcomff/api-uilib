@@ -300,7 +300,20 @@ export interface paths {
         get: operations["get_rental_session_rental_sessions__session_id__get"];
         put?: never;
         post?: never;
-        delete?: never;
+        /**
+         * Delete Rental Session
+         * @description Deletes a session.
+         *
+         *     Scopes: `["rental.session.admin"]`
+         *
+         *     - **session_id**: The ID of the rental session to delete.
+         *
+         *     Returns the deleted rental session.
+         *
+         *     Raises **ForbiddenAction** if the session is in RESERVED, ACTIVE, OVERDUE status.
+         *     Raises **ObjectNotFound** if the session does not exist.
+         */
+        delete: operations["delete_rental_session_rental_sessions__session_id__delete"];
         options?: never;
         head?: never;
         /**
@@ -600,6 +613,8 @@ export interface components {
             availability: boolean;
             /** Available Items Count */
             available_items_count?: number | null;
+            /** Cool Down End Ts */
+            cool_down_end_ts?: string | null;
             /** Description */
             description?: string | null;
             /** Id */
@@ -708,6 +723,10 @@ export interface components {
         };
         /** ValidationError */
         ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
             /** Location */
             loc: (string | number)[];
             /** Message */
@@ -1197,6 +1216,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RentalSessionGet"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_rental_session_rental_sessions__session_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatusResponseModel"];
                 };
             };
             /** @description Validation Error */
