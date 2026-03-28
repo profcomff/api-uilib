@@ -268,6 +268,26 @@ export interface paths {
         patch: operations["update_lecturer_rating_lecturer_import_rating_patch"];
         trace?: never;
     };
+    "/rating/lecturer/timetable-id/{timetable_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Lecturer By Timetable Id
+         * @description Возвращает преподавателя по его timetable_id
+         */
+        get: operations["get_lecturer_by_timetable_id_lecturer_timetable_id__timetable_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -281,6 +301,16 @@ export interface components {
             create_ts: string;
             /** Dislike Count */
             dislike_count: number;
+            /**
+             * Is Disliked
+             * @default false
+             */
+            is_disliked: boolean;
+            /**
+             * Is Liked
+             * @default false
+             */
+            is_liked: boolean;
             /** Lecturer Id */
             lecturer_id: number;
             /** Like Count */
@@ -365,6 +395,16 @@ export interface components {
             create_ts: string;
             /** Dislike Count */
             dislike_count: number;
+            /**
+             * Is Disliked
+             * @default false
+             */
+            is_disliked: boolean;
+            /**
+             * Is Liked
+             * @default false
+             */
+            is_liked: boolean;
             /** Lecturer Id */
             lecturer_id: number;
             /** Like Count */
@@ -406,6 +446,16 @@ export interface components {
             create_ts: string;
             /** Dislike Count */
             dislike_count: number;
+            /**
+             * Is Disliked
+             * @default false
+             */
+            is_disliked: boolean;
+            /**
+             * Is Liked
+             * @default false
+             */
+            is_liked: boolean;
             /** Lecturer Id */
             lecturer_id: number;
             /** Like Count */
@@ -632,6 +682,10 @@ export interface components {
         };
         /** ValidationError */
         ValidationError: {
+            /** Context */
+            ctx?: Record<string, never>;
+            /** Input */
+            input?: unknown;
             /** Location */
             loc: (string | number)[];
             /** Message */
@@ -1105,6 +1159,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LecturerUpdateRatingPatch"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_lecturer_by_timetable_id_lecturer_timetable_id__timetable_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                timetable_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LecturerGet"];
                 };
             };
             /** @description Validation Error */
